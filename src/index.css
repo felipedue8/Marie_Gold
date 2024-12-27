@@ -1,68 +1,163 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+/* Estilos generales */
 body {
+  background-color: #FAF3E0;
+  width: 100%;
   margin: 0;
+  padding: 0;
+}
+
+/* Header */
+header {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: "Pacifico", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 180%;
+  color: gold;
+  text-shadow: 
+    -0.2px -0.2px 0 black, 
+    -0.2px -0.2px 0 black, 
+    -0.2px 1px 0 black, 
+    1px 1px 0 black;
+  text-align: left;
+  background: rgb(247,190,199);
+  background: radial-gradient(circle, rgba(247,190,199,1) 0%, rgba(227,200,204,1) 94%);
+  width: 100%;
+  height: auto;
+  border: 1px inset;
+  box-shadow: -1px -1px 0 pink, -1px -1px 0 pink, -1px 1px 0 pink, 1px 1px 0 pink;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Imágenes dentro del header */
+header img {
+  width: 10%;
+  max-width: 80px;
+  height: auto;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+/* Navegación */
+nav {
+  justify-content: center;
+  display: flex;
+  color: #FAF3E0;
+  text-shadow: 
+    -0.2px -0.2px 0 black, 
+    -0.2px -0.2px 0 black, 
+    -0.2px 1px 0 black, 
+    1px 1px 0 black;
+  background: rgb(255,182,193);
+  background: radial-gradient(circle, rgba(255,182,193,1) 0%, rgba(221,147,158,1) 94%);
+  width: 100%;
+  height: auto;
+  border: 1px inset;
+  box-sizing: border-box;
+  overflow-x: auto;  /* Habilita el desbordamiento horizontal */
+}
+
+nav ul {
+  display: flex;
+  justify-content: flex-start; /* Alinea los elementos de la izquierda */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan cuando no haya espacio */
+}
+
+nav ul li {
+  margin: 10px;
+  font-size: 1.5rem;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  white-space: nowrap; /* Evita que el texto de los items se divida */
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+nav ul li:hover {
+  color: #FFD700;
+}
+
+/* Botones para mover las imágenes */
+.botones {
+  width: 100%;
+  margin-top: 5%;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.botones img {
+  width: 30px;
+  height: auto;
+}
+
+/* Contenedor de las imágenes */
+.fondo_imagenes {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 10px;
+  padding: 10px;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.fondo_imagenes::-webkit-scrollbar {
+  display: none;
+}
+
+.fondo_imagenes img {
+  justify-content: center;
+  width: 16%;
+  padding: 15px;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+}
+
+.fondo_imagenes img:hover {
+  transform: scale(1.05);
+}
+
+/* Media Queries para dispositivos pequeños */
+@media (max-width: 768px) {
+  header {
+    font-size: 140%;
   }
-  a:hover {
-    color: #747bff;
+
+  nav ul li {
+    font-size: 1.2rem;
+    margin-left: 10px;
+    margin-right: 10px;
   }
-  button {
-    background-color: #f9f9f9;
+
+  .botones img {
+    width: 25px;
+  }
+
+  .fondo_imagenes img {
+    width: 40%;
+  }
+}
+
+/* Media Queries para móviles */
+@media (max-width: 480px) {
+  header {
+    font-size: 120%;
+  }
+
+  nav ul li {
+    font-size: 1rem;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .botones img {
+    width: 20px;
+  }
+
+  .fondo_imagenes img {
+    width: 60%;
   }
 }
