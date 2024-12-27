@@ -32,9 +32,10 @@ header {
 
 /* Imágenes dentro del header */
 header img {
-  width: 10%;
-  max-width: 80px;
-  height: auto;
+  width: 200px;
+  
+  min-height: 60%;
+  
 }
 
 /* Navegación */

@@ -15,21 +15,17 @@ export  function App() {
 
     // Resetea el scroll cuando llega al final
     const handleScroll = () => {
-      if (contenedor.scrollLeft >= contenedor.scrollWidth / 2) {
-        contenedor.scrollLeft = 0;
-      } else if (contenedor.scrollLeft === 0) {
-        contenedor.scrollLeft = contenedor.scrollWidth / 2;
+      if (contenedor.scrollLeft >= contenedor.scrollWidth / 1.9) {
+        contenedor.scrollLeft = 0.1;
+      } else if (contenedor.scrollLeft === 0.1) {
+        contenedor.scrollLeft = contenedor.scrollWidth / 1.9;
       }
     };
-
-    
-
       contenedor.addEventListener('scroll', handleScroll);
 
        return () => {
       contenedor.removeEventListener('scroll', handleScroll);
         };
-      
        }, []);
             
   const clickiz =() =>{
