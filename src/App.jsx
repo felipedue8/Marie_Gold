@@ -16,8 +16,8 @@ export  function App() {
     // Resetea el scroll cuando llega al final
     const handleScroll = () => {
       if (contenedor.scrollLeft >= contenedor.scrollWidth / 1.9) {
-        contenedor.scrollLeft = 0.1;
-      } else if (contenedor.scrollLeft === 0.1) {
+        contenedor.scrollLeft = 0.2;
+      } else if (contenedor.scrollLeft === 0.2) {
         contenedor.scrollLeft = contenedor.scrollWidth / 1.9;
       }
     };
@@ -32,7 +32,7 @@ export  function App() {
     const contenedor = contenedorRef.current;
     if (contenedor) {
       contenedor.scrollBy({
-        left: -150,
+        left: -140,
         behavior: 'smooth',
       });
     }
@@ -41,7 +41,7 @@ export  function App() {
    const contenedor = contenedorRef.current;
     if (contenedor) {
       contenedor.scrollBy({
-        left: 150,
+        left: 140,
         behavior: 'smooth',
       });
     }
