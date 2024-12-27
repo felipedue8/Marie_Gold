@@ -79,13 +79,15 @@ nav ul li:hover {
 /* Botones para mover las imágenes */
 .botones {
   width: 100%;
-  margin-top: 5%;
   position: absolute;
+  top: 50%; /* Centra los botones verticalmente */
   display: flex;
   justify-content: space-between;
+  align-items: center; /* Alinea los botones verticalmente */
   cursor: pointer;
   padding: 10px;
   box-sizing: border-box;
+  z-index: 10;
 }
 
 .botones img {
@@ -102,6 +104,7 @@ nav ul li:hover {
   padding: 10px;
   white-space: nowrap;
   box-sizing: border-box;
+  position: relative; /* Asegura que el contenedor tenga posición */
 }
 
 .fondo_imagenes::-webkit-scrollbar {
@@ -132,8 +135,8 @@ nav ul li:hover {
     margin-right: 10px;
   }
 
-  .botones img {
-    width: 25px;
+  .botones {
+    display: none; /* Oculta los botones en pantallas pequeñas */
   }
 
   .fondo_imagenes img {
@@ -153,11 +156,38 @@ nav ul li:hover {
     margin-right: 5px;
   }
 
-  .botones img {
-    width: 20px;
+  .botones {
+    display: none; /* Oculta los botones en pantallas pequeñas */
   }
 
   .fondo_imagenes img {
     width: 60%;
+  }
+}
+
+/* Media Queries para PC (pantallas grandes) */
+@media (min-width: 769px) {
+  .botones {
+    display: flex; /* Muestra los botones en pantallas grandes */
+  }
+  
+  .contenedor_padre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .fondo_imagenes {
+    display: flex;
+    flex-wrap: nowrap; /* Evita que las imágenes se envuelvan */
+    gap: 10px;
+    width: 80%; /* Ajusta el ancho del contenedor */
+  }
+
+  /* Asegurando que los botones queden al lado de las imágenes */
+  .botones img {
+    width: 40px;
+    height: auto;
   }
 }
