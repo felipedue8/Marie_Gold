@@ -44,9 +44,9 @@ nav {
   display: flex;
   color: #FAF3E0;
   text-shadow: 
-    -0.2px -0.2px 0 black, 
-    -0.2px -0.2px 0 black, 
-    -0.2px 1px 0 black, 
+    -0.1px -0.1px 0 black, 
+    -0.1px -0.1px 0 black, 
+    -0.1px 1px 0 black, 
     1px 1px 0 black;
   background: rgb(255,182,193);
   background: radial-gradient(circle, rgba(255,182,193,1) 0%, rgba(221,147,158,1) 94%);
@@ -68,7 +68,7 @@ nav ul {
 
 nav ul li {
   margin: 10px;
-  font-size: 1.5rem;
+  font-size: 2rem;
   cursor: pointer;
   white-space: nowrap; /* Evita que el texto de los items se divida */
 }
@@ -131,9 +131,9 @@ nav ul li:hover {
   }
 
   nav ul li {
-    font-size: 1.2rem;
-    margin-left: 10px;
-    margin-right: 10px;
+    font-size: 2rem;
+    margin-left: 5px;
+    margin-right: 5px;
   }
 
   .botones {
@@ -190,5 +190,114 @@ nav ul li:hover {
   .botones img {
     width: 40px;
     height: auto;
+  }
+}
+.productos_temporada_titulo{
+  font-family: "Pacifico", serif;
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--font-color);
+  text-align: center;
+  margin: 20px;
+  color: rgb(122, 21, 21);
+}
+.productos_temporada {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 20px;
+padding: 20px;
+box-sizing: border-box;
+}
+footer {
+  background-color: rgb(255, 182, 193);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Contenedor principal */
+.footer_izquierda {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Logo y descripción */
+.logo_descripcion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo_descripcion img {
+  width: 150px; /* Tamaño adaptable */
+  height: auto;
+}
+
+.logo_descripcion h3 {
+  font-family: "Pacifico", serif;
+  font-size: 2rem;
+  color: gold;
+  text-shadow: -1px -1px 0 black, 1px 1px 0 black;
+}
+
+.logo_descripcion p {
+  font-size: 1.2rem;
+  color: black;
+  padding: 10px;
+}
+
+/* Redes sociales */
+.redes_sociales {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.redes_sociales a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+}
+
+.redes_sociales img {
+  width: 30px; /* Tamaño adaptable */
+  height: auto;
+}
+
+/* Diseño responsive */
+@media (min-width: 768px) {
+  footer {
+    text-align: left;
+  }
+
+  .footer_izquierda {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo_descripcion {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .redes_sociales {
+    align-items: flex-start;
   }
 }
