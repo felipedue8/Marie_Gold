@@ -2,7 +2,7 @@ import React from 'react';
 import dere from "./imgs/dere.png";
 import izqui from "./imgs/izqu.png";
 import { tarjetas } from './Tarjetas';
-import { productos } from './productos';
+import { productos } from './productos.js';
 
 export function Home({ clickiz, clickdr, contenedorRef }) {
   return (
