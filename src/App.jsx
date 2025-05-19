@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { Home } from './Home';
 import { Categoria } from './Categoria';
 import './index.css';
+import { productos } from './productos';
 
 export function App() {
   const contenedorRef = useRef(null);
