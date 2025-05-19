@@ -66,15 +66,23 @@ nav ul {
   flex-wrap: wrap; /* Permite que los elementos se envuelvan cuando no haya espacio */
 }
 
-nav ul li {
+nav ul li  {
   margin: 10px;
   font-size: 2rem;
   cursor: pointer;
+  font-family: "Pacifico", serif;
+  
   white-space: nowrap; /* Evita que el texto de los items se divida */
 }
 
-nav ul li:hover {
+nav ul li a {
+  color: white;
+  
+}
+
+nav ul li a:hover {
   color: #FFD700;
+  
 }
 
 /* Botones para mover las imágenes */

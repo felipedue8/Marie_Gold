@@ -1,12 +1,8 @@
 import React, { useRef, useEffect } from 'react';
-import dere from "./imgs/dere.png";
-import izqui from "./imgs/izqu.png";
-import { tarjetas } from './Tarjetas';
-import { productos } from './productos';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { Home } from './Home';
 import { Categoria } from './Categoria';
-
+import './index.css';
 
 export function App() {
   const contenedorRef = useRef(null);
