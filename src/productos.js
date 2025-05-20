@@ -26,12 +26,12 @@ export const productos = [
     alt: "Peluche de oso graduado"
   },
   {
-    id: 4,
-    titulo: "Peluche graduado mediano",
-    descripcion: "peluche graduado",
+    id: 4.11,
+    titulo: "Ramo de flores + hotwheels",
+    descripcion: "ramo de flores de diferentes colores combinado con hotwheels",
     precio: "30.000",
-    imagen: "/peluches/peluche_graduado_mediano-8.webp",
-    alt: "Peluche graduado mediano"
+    imagen: "/ramos/4.11.webp",
+    alt: "Ramo de flores + hotwheels"
   },
   {
     id: 5,
