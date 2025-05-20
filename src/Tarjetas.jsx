@@ -1,6 +1,7 @@
 import React from 'react';
 import './cards.css';
-import LazyImage from "./LazyImage.jsx";
+import { LazyImage } from "./LazyImage.jsx";
+
 
 export function tarjetas(title, description, price, srcimg, alt) {
   return (
