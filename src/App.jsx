@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { Home } from './Home';
 import { Categoria } from './Categoria';
 import './index.css';
-import { productos } from './productos.js';
+
 
 export function App() {
   const contenedorRef = useRef(null);
@@ -61,7 +61,7 @@ export function App() {
           color: 'inherit'
         }}
       >
-        <img src="/imgs/logoPrincipal.jpg" alt="Logo" style={{ cursor: 'pointer', height: '100px', marginRight: '10px' }} />
+        <img src="/imgs/logoPrincipal-removebg-preview.png" alt="Logo" style={{ cursor: 'pointer', height: '100px', marginRight: '10px' }} />
         <h1 style={{ cursor: 'pointer', margin: 0 }}>Marie Golden</h1>
       </Link>
     </header>

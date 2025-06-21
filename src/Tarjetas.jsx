@@ -1,4 +1,3 @@
-import React from 'react';
 import './cards.css';
 import { LazyImage } from "./LazyImage.jsx";
 

@@ -1,311 +1,313 @@
-/* Estilos generales */
-body {
-  background-color: #FAF3E0;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
 
-/* Header */
-header {
-  display: flex;
-  font-family: "Pacifico", serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 180%;
-  color: gold;
-  text-shadow: 
-    -0.2px -0.2px 0 black, 
-    -0.2px -0.2px 0 black, 
-    -0.2px 1px 0 black, 
-    1px 1px 0 black;
-  text-align: left;
-  background: rgb(247,190,199);
-  background: radial-gradient(circle, rgba(247,190,199,1) 0%, rgba(227,200,204,1) 94%);
-  width: 100%;
-  height: auto;
-  border: 1px inset;
-  box-shadow: -1px -1px 0 pink, -1px -1px 0 pink, -1px 1px 0 pink, 1px 1px 0 pink;
-  padding: 10px;
-  box-sizing: border-box;
-}
 
-/* Imágenes dentro del header */
-header img {
-  width: 200px;
-  
-  min-height: 60%;
-  
-}
+  /* Estilos generales */
+  body {
+    background-color: #FAF3E0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
-/* Navegación */
-nav {
-  justify-content: center;
-  display: flex;
-  color: #FAF3E0;
-  text-shadow: 
-    -0.1px -0.1px 0 black, 
-    -0.1px -0.1px 0 black, 
-    -0.1px 1px 0 black, 
-    1px 1px 0 black;
-  background: rgb(255,182,193);
-  background: radial-gradient(circle, rgba(255,182,193,1) 0%, rgba(221,147,158,1) 94%);
-  width: 100%;
-  height: auto;
-  border: 1px inset;
-  box-sizing: border-box;
-  overflow-x: auto;  /* Habilita el desbordamiento horizontal */
-}
-
-nav ul {
-  display: flex;
-  justify-content: flex-start; /* Alinea los elementos de la izquierda */
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  flex-wrap: wrap; /* Permite que los elementos se envuelvan cuando no haya espacio */
-}
-
-nav ul li  {
-  margin: 10px;
-  font-size: 2rem;
-  cursor: pointer;
-  font-family: "Pacifico", serif;
-  
-  white-space: nowrap; /* Evita que el texto de los items se divida */
-}
-
-nav ul li a {
-  color: white;
-  
-}
-
-nav ul li a:hover {
-  color: #FFD700;
-  
-}
-
-/* Botones para mover las imágenes */
-.botones {
-  width: 100%;
-  position: absolute;
-  top: 50%; /* Centra los botones verticalmente */
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* Alinea los botones verticalmente */
-  cursor: pointer;
-  padding: 10px;
-  box-sizing: border-box;
-  z-index: 10;
-}
-
-.botones img {
-  width: 30px;
-  height: auto;
-}
-
-/* Contenedor de las imágenes */
-.fondo_imagenes {
-  display: flex;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  gap: 10px;
-  padding: 10px;
-  white-space: nowrap;
-  box-sizing: border-box;
-  position: relative; /* Asegura que el contenedor tenga posición */
-}
-
-.fondo_imagenes::-webkit-scrollbar {
-  display: none;
-}
-
-.fondo_imagenes img {
-  justify-content: center;
-  width: 16%;
-  padding: 15px;
-  border-radius: 15px;
-  transition: transform 0.3s ease;
-}
-
-.fondo_imagenes img:hover {
-  transform: scale(1.05);
-}
-
-/* Media Queries para dispositivos pequeños */
-@media (max-width: 768px) {
+  /* Header */
   header {
-    font-size: 140%;
-  }
-
-  nav ul li {
-    font-size: 2rem;
-    margin-left: 5px;
-    margin-right: 5px;
-  }
-
-  .botones {
-    display: none; /* Oculta los botones en pantallas pequeñas */
-  }
-
-  .fondo_imagenes img {
-    width: 40%;
-  }
-}
-
-/* Media Queries para móviles */
-@media (max-width: 480px) {
-  header {
-    font-size: 120%;
-  }
-
-  nav ul li {
-    font-size: 1rem;
-    margin-left: 5px;
-    margin-right: 5px;
-  }
-
-  .botones {
-    display: none; /* Oculta los botones en pantallas pequeñas */
-  }
-
-  .fondo_imagenes img {
-    width: 60%;
-  }
-}
-
-/* Media Queries para PC (pantallas grandes) */
-@media (min-width: 769px) {
-  .botones {
-    display: flex; /* Muestra los botones en pantallas grandes */
-  }
-  
-  .contenedor_padre {
     display: flex;
+    font-family: "Pacifico", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 180%;
+    color: gold;
+    text-shadow: 
+      -0.2px -0.2px 0 black, 
+      -0.2px -0.2px 0 black, 
+      -0.2px 1px 0 black, 
+      1px 1px 0 black;
+    text-align: left;
+    background: rgb(247,190,199);
+    background: radial-gradient(circle, rgba(247,190,199,1) 0%, rgba(227,200,204,1) 94%);
+    width: 100%;
+    height: auto;
+    border: 1px inset;
+    box-shadow: -1px -1px 0 pink, -1px -1px 0 pink, -1px 1px 0 pink, 1px 1px 0 pink;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  /* Imágenes dentro del header */
+  header img {
+    width: 200px;
+    
+    min-height: 60%;
+    
+  }
+
+  /* Navegación */
+  nav {
     justify-content: center;
-    align-items: center;
-    position: relative;
-  }
-
-  .fondo_imagenes {
     display: flex;
-    flex-wrap: nowrap; /* Evita que las imágenes se envuelvan */
-    gap: 10px;
-    width: 80%; /* Ajusta el ancho del contenedor */
+    color: #FAF3E0;
+    text-shadow: 
+      -0.1px -0.1px 0 black, 
+      -0.1px -0.1px 0 black, 
+      -0.1px 1px 0 black, 
+      1px 1px 0 black;
+    background: rgb(255,182,193);
+    background: radial-gradient(circle, rgba(255,182,193,1) 0%, rgba(221,147,158,1) 94%);
+    width: 100%;
+    height: auto;
+    border: 1px inset;
+    box-sizing: border-box;
+    overflow-x: auto;  /* Habilita el desbordamiento horizontal */
   }
 
-  /* Asegurando que los botones queden al lado de las imágenes */
+  nav ul {
+    display: flex;
+    justify-content: flex-start; /* Alinea los elementos de la izquierda */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan cuando no haya espacio */
+  }
+
+  nav ul li  {
+    margin: 10px;
+    font-size: 2rem;
+    cursor: pointer;
+    font-family: "Pacifico", serif;
+    
+    white-space: nowrap; /* Evita que el texto de los items se divida */
+  }
+
+  nav ul li a {
+    color: white;
+    
+  }
+
+  nav ul li a:hover {
+    color: #FFD700;
+    
+  }
+
+  /* Botones para mover las imágenes */
+  .botones {
+    width: 100%;
+    position: absolute;
+    top: 50%; /* Centra los botones verticalmente */
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Alinea los botones verticalmente */
+    cursor: pointer;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 10;
+  }
+
   .botones img {
-    width: 40px;
+    width: 30px;
     height: auto;
   }
-}
-.productos_temporada_titulo{
-  font-family: "Pacifico", serif;
-  font-size: 30px;
-  font-weight: 500;
-  color: var(--font-color);
-  text-align: center;
-  margin: 20px;
-  color: rgb(122, 21, 21);
-}
-.productos_temporada {
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-gap: 20px;
-padding: 20px;
-box-sizing: border-box;
-}
-footer {
-  background-color: rgb(255, 182, 193);
+
+  /* Contenedor de las imágenes */
+  .fondo_imagenes {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 10px;
+    padding: 10px;
+    white-space: nowrap;
+    box-sizing: border-box;
+    position: relative; /* Asegura que el contenedor tenga posición */
+  }
+
+  .fondo_imagenes::-webkit-scrollbar {
+    display: none;
+  }
+
+  .fondo_imagenes  img {
+    justify-content: center;
+    width: 16%;
+    padding: 15px;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+  }
+
+  .fondo_imagenes img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Media Queries para dispositivos pequeños */
+  @media (max-width: 768px) {
+    header {
+      font-size: 140%;
+    }
+
+    nav ul li {
+      font-size: 2rem;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    .botones {
+      display: none; /* Oculta los botones en pantallas pequeñas */
+    }
+
+    .fondo_imagenes img {
+      width: 40%;
+    }
+  }
+
+  /* Media Queries para móviles */
+  @media (max-width: 480px) {
+    header {
+      font-size: 120%;
+    }
+
+    nav ul li {
+      font-size: 1rem;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    .botones {
+      display: none; /* Oculta los botones en pantallas pequeñas */
+    }
+
+    .fondo_imagenes img {
+      width: 60%;
+    }
+  }
+
+  /* Media Queries para PC (pantallas grandes) */
+  @media (min-width: 769px) {
+    .botones {
+      display: flex; /* Muestra los botones en pantallas grandes */
+    }
+    
+    .contenedor_padre {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .fondo_imagenes {
+      display: flex;
+      flex-wrap: nowrap; /* Evita que las imágenes se envuelvan */
+      gap: 10px;
+      width: 80%; /* Ajusta el ancho del contenedor */
+    }
+
+    /* Asegurando que los botones queden al lado de las imágenes */
+    .botones img {
+      width: 40px;
+      height: auto;
+    }
+  }
+  .productos_temporada_titulo{
+    font-family: "Pacifico", serif;
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--font-color);
+    text-align: center;
+    margin: 20px;
+    color: rgb(122, 21, 21);
+  }
+  .productos_temporada {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-/* Contenedor principal */
-.footer_izquierda {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1200px;
-}
-
-/* Logo y descripción */
-.logo_descripcion {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 600px;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.logo_descripcion img {
-  width: 150px; /* Tamaño adaptable */
-  height: auto;
-}
-
-.logo_descripcion h3 {
-  font-family: "Pacifico", serif;
-  font-size: 2rem;
-  color: gold;
-  text-shadow: -1px -1px 0 black, 1px 1px 0 black;
-}
-
-.logo_descripcion p {
-  font-size: 1.2rem;
-  color: black;
-  padding: 10px;
-}
-
-/* Redes sociales */
-.redes_sociales {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  width: 100%;
-  max-width: 300px;
-}
-
-.redes_sociales a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: black;
-  font-size: 1rem;
-}
-
-.redes_sociales img {
-  width: 30px; /* Tamaño adaptable */
-  height: auto;
-}
-
-/* Diseño responsive */
-@media (min-width: 768px) {
+  box-sizing: border-box;
+  }
   footer {
-    text-align: left;
-  }
-
-  .footer_izquierda {
-    flex-direction: row;
-    justify-content: space-between;
+    background-color: rgb(255, 182, 193);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
   }
 
+  /* Contenedor principal */
+  .footer_izquierda {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  /* Logo y descripción */
   .logo_descripcion {
-    flex-direction: row;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    margin-bottom: 20px;
   }
 
-  .redes_sociales {
-    align-items: flex-start;
+  .logo_descripcion img {
+    width: 150px; /* Tamaño adaptable */
+    height: auto;
   }
-}
+
+  .logo_descripcion h3 {
+    font-family: "Pacifico", serif;
+    font-size: 2rem;
+    color: gold;
+    text-shadow: -1px -1px 0 black, 1px 1px 0 black;
+  }
+
+  .logo_descripcion p {
+    font-size: 1.2rem;
+    color: black;
+    padding: 10px;
+  }
+
+  /* Redes sociales */
+  .redes_sociales {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .redes_sociales a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+  }
+
+  .redes_sociales img {
+    width: 30px; /* Tamaño adaptable */
+    height: auto;
+  }
+
+  /* Diseño responsive */
+  @media (min-width: 768px) {
+    footer {
+      text-align: left;
+    }
+
+    .footer_izquierda {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo_descripcion {
+      flex-direction: row;
+      text-align: left;
+    }
+
+    .redes_sociales {
+      align-items: flex-start;
+    }
+  }

@@ -2,51 +2,139 @@
 
 export const productos = [
   {
-    id: 1,
-    titulo: "ramo de flores + ferrero",
-    descripcion: "ramo de flores de diferentes colores combinado con cholate ferrero",
-    precio: "60.000",
-    imagen: "/imagenes_ramos/Ramo_rosas_azules.jpg",
-    alt: "Ramo de rosas azules"
-  },
-  {
-    id: 2,
-    titulo: "Girasol en cajita",
-    descripcion: "Girasol en cajita con tarjeta personalizada",
-    precio: "20.000",
-    imagen: "/peluches/girasol_en_cajita_con_peluche_pequeño.webp",
-    alt: "Girasol en cajita"
-  },
-  {
-    id: 3,
+    id: 3.11,
     titulo: "Osito graduado",
     descripcion: "Peluche de oso graduado",
     precio: "30.000",
-    imagen: "/peluches/osito_graduado_mediano.webp",
+    imagen: "/3.11.webp",
+    alt: "Peluche de oso graduado"
+  },
+   {
+    id: 3.12,
+    titulo: "Osito graduado",
+    descripcion: "Peluche de oso graduado",
+    precio: "30.000",
+    imagen: "/3.12.webp",
+    alt: "Peluche de oso graduado"
+  },
+   {
+    id: 3.14,
+    titulo: "Osito graduado",
+    descripcion: "Peluche de oso graduado",
+    precio: "30.000",
+    imagen: "/3.14.webp",
+    alt: "Peluche de oso graduado"
+  },
+   {
+    id: 3.15,
+    titulo: "Osito graduado",
+    descripcion: "Peluche de oso graduado",
+    precio: "30.000",
+    imagen: "/3.15.webp",
+    alt: "Peluche de oso graduado"
+  },
+   {
+    id: 3.16,
+    titulo: "Osito graduado",
+    descripcion: "Peluche de oso graduado",
+    precio: "30.000",
+    imagen: "/3.16.webp",
+    alt: "Peluche de oso graduado"
+  },
+   {
+    id: 3.17,
+    titulo: "Osito graduado",
+    descripcion: "Peluche de oso graduado",
+    precio: "30.000",
+    imagen: "/3.17.webp",
+    alt: "Peluche de oso graduado"
+  },
+   {
+    id: 3.18,
+    titulo: "Osito graduado",
+    descripcion: "Peluche de oso graduado",
+    precio: "30.000",
+    imagen: "/3.18.webp",
+    alt: "Peluche de oso graduado"
+  },
+   {
+    id: 3.19,
+    titulo: "Osito graduado",
+    descripcion: "Peluche de oso graduado",
+    precio: "30.000",
+    imagen: "/3.19.webp",
     alt: "Peluche de oso graduado"
   },
   {
     id: 4.11,
+    titulo: "cajita_con_rosas_eternas_con_mensaje_y_fotos",
+    descripcion: "cajita_con_rosas_eternas_con_mensaje_y_fotos",
+    precio: "35.000",
+    imagen: "/4.12.webp",
+    alt: "Ramo de flores + hotwheels"
+  },
+    {
+    id: 4.12,
     titulo: "Ramo de flores + hotwheels",
     descripcion: "ramo de flores de diferentes colores combinado con hotwheels",
     precio: "30.000",
-    imagen: "/ramos/4.11.webp",
+    imagen: "/4.12.webp",
     alt: "Ramo de flores + hotwheels"
   },
-  {
-    id: 5,
-    titulo: "Peluche graduado grande",
-    descripcion: "peluche graduado",
-    precio: "50.000",
-    imagen: "/peluches/peluche_mediano_graduado-4.webp",
-    alt: "Peluche graduado grande"
+    {
+    id: 4.13,
+    titulo: "Ramo de flores + hotwheels",
+    descripcion: "ramo de flores de diferentes colores combinado con hotwheels",
+    precio: "30.000",
+    imagen: "/4.13.webp",
+    alt: "Ramo de flores + hotwheels"
   },
-  {
-    id: 6,
-    titulo: "Peluche graduado con tematica",
-    descripcion: "peluche graduado",
-    precio: "50.000",
-    imagen: "/peluches/ramo_mediano_con_peluche_tematica_de_grado.webp",
-    alt: "Peluche graduado grande"
-  }
+    {
+    id: 4.14,
+    titulo: "Ramo de flores + hotwheels",
+    descripcion: "ramo de flores de diferentes colores combinado con hotwheels",
+    precio: "30.000",
+    imagen: "/4.14.webp",
+    alt: "Ramo de flores + hotwheels"
+  },
+ {
+    id: 4.15,
+    titulo: "cajita_con_rosas_eternas_con_mensaje_y_fotos",
+    descripcion: "cajita_con_rosas_eternas_con_mensaje_y_fotos",
+    precio: "35.000",
+    imagen: "/4.15.webp",
+    alt: "Ramo de flores + hotwheels"
+  },
+    {
+    id: 4.16,
+    titulo: "Ramo de flores + hotwheels",
+    descripcion: "ramo de flores de diferentes colores combinado con hotwheels",
+    precio: "30.000",
+    imagen: "/4.16.webp",
+    alt: "Ramo de flores + hotwheels"
+  },
+    {
+    id: 4.17,
+    titulo: "Ramo de flores + hotwheels",
+    descripcion: "ramo de flores de diferentes colores combinado con hotwheels",
+    precio: "30.000",
+    imagen: "/4.17.webp",
+    alt: "Ramo de flores + hotwheels"
+  },
+    {
+    id: 4.18,
+    titulo: "Ramo de flores + hotwheels",
+    descripcion: "ramo de flores de diferentes colores combinado con hotwheels",
+    precio: "30.000",
+    imagen: "/4.18.webp",
+    alt: "Ramo de flores + hotwheels"
+  },
+   {
+    id: 4.19,
+    titulo: "Ramo de flores + hotwheels",
+    descripcion: "ramo de flores de diferentes colores combinado con hotwheels",
+    precio: "30.000",
+    imagen: "/4.19.webp",
+    alt: "Ramo de flores + hotwheels"
+  },
 ];
