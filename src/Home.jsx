@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import React from 'react';
-import dere from "./imgs/dere.png";
-import izqui from "./imgs/izqu.png";
 import { tarjetas } from './Tarjetas';
 import { productos } from './productos.js';
-import { LazyImage } from "./LazyImage.jsx";
-
 const PRODUCTOS_POR_PAGINA = 10; // <--- AGREGA ESTA LÍNEA
 
 export function Home({ clickiz, clickdr, contenedorRef }) {
@@ -18,41 +14,7 @@ export function Home({ clickiz, clickdr, contenedorRef }) {
 
   return (
     <>
-      <div className='contenedor_padre'>
-        <div className='botones'>
-          <img onClick={clickiz} className='iz' src={izqui} alt="" />
-          <img onClick={clickdr} className='dr' src={dere} alt="" />
-        </div>
-        <div ref={contenedorRef} className='fondo_imagenes'>
-
-
-          <img
-            src="/3.11.webp"
-            onLoad={() => console.log("Cargada")}
-            width={180}
-            height={180}
-          />
-       <img
-            src="/3.15.webp"
-            onLoad={() => console.log("Cargada")}
-            width={180}
-            height={180}
-          />
-           <img
-            src="/3.16.webp"
-            onLoad={() => console.log("Cargada")}
-            width={180}
-            height={180}
-          />
-           <img
-            src="/3.18.webp"
-            onLoad={() => console.log("Cargada")}
-            width={180}
-            height={180}
-          />
-
-        </div>
-      </div>
+      
 
 
       

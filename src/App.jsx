@@ -6,6 +6,7 @@ import './index.css';
 
 
 export function App() {
+  
   const contenedorRef = useRef(null);
   useEffect(() => {
     const contenedor = contenedorRef.current;
@@ -61,7 +62,7 @@ export function App() {
           color: 'inherit'
         }}
       >
-        <img src="/imgs/logoPrincipal-removebg-preview.png" alt="Logo" style={{ cursor: 'pointer', height: '100px', marginRight: '10px' }} />
+        <img src="/imgs/logoPrincipal-removebg-preview.png" alt="Logo" style={{ cursor: 'pointer', height: '160px', marginRight: '10px' }} />
         <h1 style={{ cursor: 'pointer', margin: 0 }}>Marie Golden</h1>
       </Link>
     </header>
