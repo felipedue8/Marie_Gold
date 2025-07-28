@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { Home } from './Home';
 import { Categoria } from './Categoria';
 import './index.css';
-import { Ramos } from './PaginasNavegacion/ramos';
+import { Ramos } from './PaginasNavegacion/Ramos';
 import { Manillas } from './PaginasNavegacion/Manillas';
 export function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
