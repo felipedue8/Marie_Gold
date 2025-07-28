@@ -1,24 +1,25 @@
-import { useState } from 'react';
-import React from 'react';
+import { useState, useMemo } from 'react';
 import { tarjetas } from './Tarjetas';
 import { productos } from './productos.js';
+
 const PRODUCTOS_POR_PAGINA = 10; // <--- AGREGA ESTA LÍNEA
 
-export function Home({ clickiz, clickdr, contenedorRef }) {
+export function Home({ contenedorRef }) {
   const [pagina, setPagina] = useState(1);
-  const productosAleatorios = [...productos].sort(() => Math.random() - 0.5);
+  
+  // Use useMemo to randomize products only once when component mounts
+  const productosAleatorios = useMemo(() => {
+    return [...productos].sort(() => Math.random() - 0.5);
+  }, []); // Empty dependency array means this only runs once
+  
   const totalPaginas = Math.ceil(productosAleatorios.length / PRODUCTOS_POR_PAGINA);
   const inicio = (pagina - 1) * PRODUCTOS_POR_PAGINA;
   const fin = inicio + PRODUCTOS_POR_PAGINA;
   const productosPagina = productosAleatorios.slice(inicio, fin);
-
+  
   return (
     <>
-      
-
-
-      
-          <div className='productos_temporada_titulo'>
+      <div className='productos_temporada_titulo'>
         <h2>LLevalo antes de que se acabe</h2>
         <div className='productos_temporada'>
           {productosPagina.map((producto) => (

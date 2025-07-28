@@ -1,16 +1,22 @@
 
 
-  /* Estilos generales */
+/* Prevent horizontal scroll and white line on right */
+html, body {
+  width: 100vw;
+  overflow-x: hidden;
+}
+/* Estilos generales */ 
   body {
     background-color: #FAF3E0;
-    width: 100%;
+    width: 100vw;
     margin: 0;
     padding: 0;
   }
 
   /* Header */
-  header {
+  .main-header {
     display: flex;
+    flex-direction: column;
     font-family: "Pacifico", serif;
     font-weight: 400;
     font-style: normal;
@@ -32,6 +38,12 @@
     box-sizing: border-box;
   }
 
+  .header-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
   /* Imágenes dentro del header */
   header img {
     width: 200px;
@@ -41,6 +53,66 @@
   }
 
   /* Navegación */
+
+  .hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  color: #fff3ce;
+  
+  font-family: fantasy;
+  }
+
+@media (max-width: 768px) {
+  .main-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .header-row {
+    width: 100vw;
+    flex-direction: row;
+    align-items: center;
+  }
+  .header-row + .header-row {
+    margin-top: 0.5rem;
+  }
+  .hamburger {
+    display: block;
+    margin-left: 0;
+    margin-top: 0;
+    align-self: flex-start;
+  }
+  nav.sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    height: 100vh;
+    width: 250px;
+    background-color: rgba(255,182,193,1);
+    transition: left 0.3s ease;
+    padding: 1rem;
+    z-index: 1000;
+  }
+  nav.sidebar.open {
+    left: 0;
+  }
+  nav.sidebar ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+}
+
   nav {
     justify-content: center;
     display: flex;
