@@ -1,0 +1,77 @@
+.dropdown-categorias-btn {
+  display: block;
+  width: 100%;
+  padding: 0.7rem 1.2rem;
+  color: #222;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: "Pacifico", serif;
+  font-size: 1.1rem;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.always-hamburger {
+  display: block !important;
+  position: relative;
+  right: 0;
+  margin-left: auto;
+  font-size: 2rem;
+    background: radial-gradient(circle, rgba(247,190,199,1) 0%, rgba(227,200,204,1) 94%);
+  border: 2px solid #cfbc4d;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: fantasy;
+  z-index: 1101;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  padding: 0.4em 1em;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.always-hamburger:hover {
+  background: #f3ade2;
+  color: rgb(170, 124, 207);
+  border-color: rgb(170, 124, 207);
+}
+
+.dropdown-categorias {
+  position: absolute;   
+  top: 100%;
+  right: 0;
+  background: #fff;
+  min-width: 180px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  margin-top: 6px;
+  z-index: 1200;
+  padding: 0.5rem 0;
+  background-color: rgb(255, 255, 255);
+}
+.dropdown-categorias ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.dropdown-categorias li {
+  padding: 0;
+}
+.dropdown-categorias a {
+  display: block;
+  padding: 0.7rem 1.2rem;
+  color: #222;
+  text-decoration: none;
+  font-family: "Pacifico", serif;
+  font-size: 1.1rem;
+  transition: background 0.2s, color 0.2s;
+}
+.dropdown-categorias a:hover,
+.dropdown-categorias-btn:hover {
+  background: #f3ade2 !important;
+  color: rgb(2, 1, 1) !important;
+  font-size: large;
+}
+
