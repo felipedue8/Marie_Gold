@@ -108,18 +108,24 @@ export function App() {
       </button>
       {/* Modal de búsqueda en móvil */}
       {showMobileSearch && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-          background: 'rgba(0,0,0,0.5)',
-          zIndex: 2100,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100vw',
+            height: '100vh',
+            background: 'rgba(0,0,0,0.5)',
+            zIndex: 2100,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          onClick={e => {
+            // Only close if clicking the overlay, not the form
+            if (e.target === e.currentTarget) setShowMobileSearch(false);
+          }}
+        >
           <form
             onSubmit={e => {
               e.preventDefault();
@@ -135,6 +141,7 @@ export function App() {
               setSidebarOpen(false);
             }}
             style={{ background: '#fff', borderRadius: 16, padding: 24, minWidth: 260, maxWidth: 320, width: '80vw', boxShadow: '0 2px 16px rgba(0,0,0,0.2)', display: 'flex', flexDirection: 'column', gap: 12 }}
+            onClick={e => e.stopPropagation()}
           >
             <input
               type="text"
@@ -198,11 +205,31 @@ export function App() {
       </nav>
       {/* Resultados de búsqueda paginados */}
       {mostrarResultados ? (
-        <ProductosPaginados
-          prefijoId={""}
-          titulo={`Resultados para: "${busqueda}"`}
-          productosCustom={resultados}
-        />
+        <div style={{marginTop: 24}}>
+          <button
+            style={{
+              marginBottom: 16,
+              padding: '8px 18px',
+              borderRadius: 8,
+              background: '#FFD700',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: 18,
+              fontFamily: 'inherit'
+            }}
+            onClick={() => {
+              setMostrarResultados(false);
+              setBusqueda("");
+            }}
+          >
+            Volver
+          </button>
+          <ProductosPaginados
+            prefijoId={""}
+            titulo={`Resultados para: "${busqueda}"`}
+            productosCustom={resultados}
+          />
+        </div>
       ) : (
       <Routes>
         <Route path="/aretes" element={<Categoria nombre="Aretes" />} />
