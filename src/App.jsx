@@ -5,7 +5,7 @@ import { BotonFlotanteCarrito } from './BotonFlotanteCarrito';
 import { Home } from './Home';
 import { Categoria } from './Categoria';
 import './index.css';
-import { Ramos } from './PaginasNavegacion/ramos';
+import { Ramos } from './PaginasNavegacion/Ramos';
 import { Manillas } from './PaginasNavegacion/Manillas';
 import { ProductoDetalle } from './PaginasNavegacion/ProductoDetalle';
 import { categoriasMenu } from './PaginasNavegacion/categoriasMenu';
