@@ -1,3 +1,80 @@
+/* Ajuste: separar botón flotante de búsqueda y botón de WhatsApp en móvil */
+@media (max-width: 768px) {
+  .boton-flotante-busqueda {
+    bottom: 90px !important;
+    right: 24px !important;
+  }
+  .boton-flotante-carrito {
+    bottom: 24px !important;
+    right: 24px !important;
+  }
+}
+/* Botón flotante de búsqueda solo en móvil */
+.boton-flotante-busqueda {
+  display: none;
+}
+@media (max-width: 768px) {
+  .buscador-pc { display: none !important; }
+  .boton-flotante-busqueda {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+}
+/* Mostrar solo el dropdown en PC y solo los links extra en móvil */
+.dropdown-pc { display: none; }
+.extra-mobile { display: block; }
+@media (min-width: 769px) {
+  .dropdown-pc { display: list-item; }
+  .extra-mobile { display: none; }
+}
+/* Dropdown de más categorías en sidebar */
+nav.sidebar ul li button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  padding: 0.7rem 1.2rem;
+  font-size: 2rem;
+  font-family: "Pacifico", serif;
+.dropdown-list-pc li a {
+  display: block;
+  padding: 0.5rem 1.2rem;
+  color: white;
+  font-size: 2rem;
+  font-family: "Pacifico", serif;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  margin: 10px 0;
+  white-space: nowrap;
+}
+.dropdown-list-pc li a:hover {
+  color: #FFD700;
+  background: none;
+}
+  z-index: 10;
+}
+nav.sidebar ul li ul li {
+  margin: 0.2rem 0;
+  font-size: 1.3rem;
+}
+nav.sidebar ul li ul li a {
+  color: #fff3ce;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-family: "Pacifico", serif;
+  padding: 0.2rem 0.5rem;
+  display: block;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+nav.sidebar ul li ul li a:hover {
+  color: #FFD700;
+}
 
 
 /* Prevent horizontal scroll and white line on right */
@@ -67,6 +144,8 @@ html, body {
   }
 
 @media (max-width: 768px) {
+  /* Oculta el dropdown de más categorías en móvil, solo visible en PC */
+  .dropdown-pc { display: none !important; }
   .main-header {
     flex-direction: column;
     align-items: flex-start;
@@ -90,20 +169,43 @@ html, body {
     top: 0;
     left: -100%;
     height: 100vh;
-    width: 250px;
+    min-width: 250px;
+    max-width: 90vw;
+    width: auto;
     background-color: rgba(255,182,193,1);
     transition: left 0.3s ease;
     padding: 1rem;
     z-index: 1000;
+    box-sizing: border-box;
+    overflow-x: auto;
+    word-break: break-word;
   }
   nav.sidebar.open {
     left: 0;
   }
   nav.sidebar ul {
-    display: flex;
+    display: block;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
   }
+  nav.sidebar ul li {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    font-size: 2rem;
+    cursor: pointer;
+    font-family: "Pacifico", serif;
+    white-space: normal;
+    word-break: break-word;
+    text-align: left;
+  }
+
+@media (min-width: 769px) {
+  .dropdown-pc { display: list-item !important; }
+}
 }
 .overlay {
   position: fixed;

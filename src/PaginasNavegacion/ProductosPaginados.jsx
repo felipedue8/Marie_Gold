@@ -9,12 +9,12 @@ const PRODUCTOS_POR_PAGINA = 10;
  * @param {string} prefijoId - Prefijo que deben tener los ids de los productos (ej: '4.' para Ramos)
  * @param {string} titulo - Título a mostrar arriba de los productos
  */
-export function ProductosPaginados({ prefijoId, titulo }) {
+export function ProductosPaginados({ prefijoId, titulo, productosCustom }) {
   const [pagina, setPagina] = useState(1);
-  const productosFiltrados = useMemo(() =>
-    productos.filter(p => String(p.id).startsWith(prefijoId)),
-    [prefijoId]
-  );
+  const productosFiltrados = useMemo(() => {
+    if (productosCustom) return productosCustom;
+    return productos.filter(p => String(p.id).startsWith(prefijoId));
+  }, [prefijoId, productosCustom]);
   const totalPaginas = Math.ceil(productosFiltrados.length / PRODUCTOS_POR_PAGINA);
   const inicio = (pagina - 1) * PRODUCTOS_POR_PAGINA;
   const fin = inicio + PRODUCTOS_POR_PAGINA;
@@ -26,7 +26,7 @@ export function ProductosPaginados({ prefijoId, titulo }) {
       <div className='productos_temporada'>
         {productosPagina.map((producto) => (
           <div key={producto.id} className="tarjeta">
-            {tarjetas(producto.titulo, producto.descripcion, producto.precio, producto.imagen, producto.alt)}
+            {tarjetas(producto.titulo, producto.descripcion, producto.precio, producto.imagen, producto.alt, producto.id)}
           </div>
         ))}
       </div>

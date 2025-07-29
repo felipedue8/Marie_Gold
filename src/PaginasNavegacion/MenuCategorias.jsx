@@ -21,7 +21,7 @@ export function MenuCategorias({ onCategoriaSeleccionada, categorias }) {
   const categoriasMostrar = categorias || categoriasMenu;
 
   return (
-    <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end', position: 'relative', zIndex: 1100 }} ref={menuRef}>
+    <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-start', position: 'relative', zIndex: 1100 }} ref={menuRef}>
       <button
         className="hamburger always-hamburger"
         style={{ margin: 0 }}

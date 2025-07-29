@@ -24,7 +24,7 @@ export function Home({ contenedorRef }) {
         <div className='productos_temporada'>
           {productosPagina.map((producto) => (
             <div key={producto.id} className="tarjeta">
-              {tarjetas(producto.titulo, producto.descripcion, producto.precio, producto.imagen, producto.alt)}
+              {tarjetas(producto.titulo, producto.descripcion, producto.precio, producto.imagen, producto.alt, producto.id)}
             </div>
           ))}
         </div>
