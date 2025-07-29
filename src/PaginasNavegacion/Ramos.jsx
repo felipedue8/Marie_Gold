@@ -3,7 +3,7 @@ import { categoriasMenu } from './categoriasMenu';
 import { MenuCategorias } from './MenuCategorias';
 import { ProductosPaginados } from './ProductosPaginados';
 
-export function Ramos() {
+export function Ramos({ sidebarOpen }) {
   // Filtra solo las categorías de manillas
   const categoriasGeneral = categoriasMenu.filter(cat => cat.prefijoId.startsWith('4.'));
   // Elige la primera como predeterminada
@@ -11,7 +11,7 @@ export function Ramos() {
 
   return (
     <>
-      <MenuCategorias categorias={categoriasGeneral} onCategoriaSeleccionada={setCategoria} />
+      <MenuCategorias categorias={categoriasGeneral} onCategoriaSeleccionada={setCategoria} sidebarOpen={sidebarOpen} />
       <ProductosPaginados prefijoId={categoria.prefijoId} titulo={categoria.nombre} />
     </>
   );

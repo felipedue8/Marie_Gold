@@ -6,6 +6,7 @@ import { Home } from './Home';
 import { Categoria } from './Categoria';
 import './index.css';
 import { Ramos } from './PaginasNavegacion/Ramos';
+import { CrearManilla } from './PaginasNavegacion/CrearManilla';
 import { Manillas } from './PaginasNavegacion/Manillas';
 import { ProductoDetalle } from './PaginasNavegacion/ProductoDetalle';
 import { categoriasMenu } from './PaginasNavegacion/categoriasMenu';
@@ -87,7 +88,10 @@ export function App() {
       {/* Botón flotante de búsqueda solo en móvil */}
       <button
         className="boton-flotante-busqueda"
-        onClick={() => setShowMobileSearch(true)}
+        onClick={() => {
+          setShowMobileSearch(true);
+          setSidebarOpen(false);
+        }}
         style={{
           position: 'fixed',
           bottom: 24,
@@ -123,7 +127,10 @@ export function App() {
           }}
           onClick={e => {
             // Only close if clicking the overlay, not the form
-            if (e.target === e.currentTarget) setShowMobileSearch(false);
+            if (e.target === e.currentTarget) {
+              setShowMobileSearch(false);
+              setSidebarOpen(false);
+            }
           }}
         >
           <form
@@ -153,7 +160,7 @@ export function App() {
             />
             <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
               <button type="submit" style={{ fontSize: 18, padding: '6px 18px', borderRadius: 8, background: '#FFD700', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}>Buscar</button>
-              <button type="button" onClick={() => setShowMobileSearch(false)} style={{ fontSize: 18, padding: '6px 10px', borderRadius: 8, background: '#ffb3b3', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}>Cancelar</button>
+              <button type="button" onClick={() => { setShowMobileSearch(false); setSidebarOpen(false); }} style={{ fontSize: 18, padding: '6px 10px', borderRadius: 8, background: '#ffb3b3', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}>Cancelar</button>
             </div>
           </form>
         </div>
@@ -196,7 +203,10 @@ export function App() {
           {/* En móvil, los links extra se muestran como <li> normales justo debajo */}
           {linksExtra.map(link => (
             <li key={link.ruta} className="extra-mobile">
-              <Link to={link.ruta} onClick={() => setSidebarOpen(false)}>
+              <Link to={link.ruta} onClick={() => {
+                setSidebarOpen(false);
+                setDropdownOpen(false);
+              }}>
                 {link.nombre}
               </Link>
             </li>
@@ -233,10 +243,10 @@ export function App() {
       ) : (
       <Routes>
         <Route path="/aretes" element={<Categoria nombre="Aretes" />} />
-        <Route path="/manillas" element={<Manillas nombre="Manillas" />} />
+        <Route path="/manillas" element={<Manillas nombre="Manillas" sidebarOpen={sidebarOpen} />} />
         <Route path="/anillos" element={<Categoria nombre="Anillos" />} />
         <Route path="/accesorios" element={<Categoria nombre="Accesorios" />} />
-        <Route path="/ramos" element={<Ramos nombre="Ramos" />} />
+        <Route path="/ramos" element={<Ramos nombre="Ramos" sidebarOpen={sidebarOpen} />} />
         <Route path="/crea" element={<Categoria nombre="Crea la tuya" />} />
         {/* Rutas para las nuevas categorías */}
         <Route path="/collares" element={<Categoria nombre="Collares" />} />
