@@ -129,6 +129,9 @@ export const productos = [
       precio: "30.000",
       imagen: "/4.16.webp",
       alt: "Ramo de flores + hotwheels"
+      este texto en un comentario es para que no se borre el id 4.16
+      // si se borra el id 4.16, se pierde la referencia a este producto en la base de datos
+      // y no se puede acceder a él desde la aplicación 
     },
     */
   {
