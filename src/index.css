@@ -1,3 +1,89 @@
+.novia-day-btn {
+  margin-top: 12px;
+  padding: 10px 22px;
+  background: linear-gradient(90deg,#d72660 40%,#fbb1b1 100%);
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  font-size: 1.1rem;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #d7266022;
+  transition: background 0.3s, transform 0.2s;
+}
+.novia-day-btn:hover {
+  background: linear-gradient(90deg,#fbb1b1 40%,#d72660 100%);
+  transform: scale(1.05);
+}
+/* Animación Día de la Novia */
+.novia-day-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255, 245, 250, 0.85);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 1s;
+}
+.novia-day-message {
+  background: #fff0f6;
+  border-radius: 24px;
+  box-shadow: 0 4px 32px #eab1d6;
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+  min-width: 280px;
+  max-width: 90vw;
+}
+.novia-day-message h2 {
+  color: #d72660;
+  font-size: 2rem;
+  margin-bottom: 8px;
+  font-family: 'Segoe Script', cursive;
+}
+.novia-day-message p {
+  color: #6c3483;
+  font-size: 1.2rem;
+  margin-bottom: 18px;
+}
+
+.flores-animadas {
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.flor {
+  position: absolute;
+  font-size: 2.2rem;
+  opacity: 0.85;
+  animation: flotar 7s linear infinite;
+  z-index: 1;
+}
+.flor1 { left: -18px; top: -18px; animation-delay: 0s; }
+.flor2 { right: -18px; top: -18px; animation-delay: 1s; }
+.flor3 { left: -18px; bottom: -18px; animation-delay: 2s; }
+.flor4 { right: -18px; bottom: -18px; animation-delay: 3s; }
+.flor5 { left: 50%; top: -22px; transform: translateX(-50%); animation-delay: 1.5s; }
+.flor6 { left: -22px; top: 50%; transform: translateY(-50%); animation-delay: 2.5s; }
+.flor7 { right: -22px; top: 50%; transform: translateY(-50%); animation-delay: 4s; }
+.flor8 { left: 50%; bottom: -22px; transform: translateX(-50%); animation-delay: 5s; }
+
+.novia-day-message {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes flotar {
+  0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.85; }
+  50% { transform: translateY(-30px) scale(1.1) rotate(10deg); opacity: 1; }
+  100% { transform: translateY(0) scale(1) rotate(-10deg); opacity: 0.85; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 /* Ajuste: separar botón flotante de búsqueda y botón de WhatsApp en móvil */
 @media (max-width: 768px) {
   .boton-flotante-busqueda {

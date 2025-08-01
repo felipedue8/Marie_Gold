@@ -290,6 +290,6 @@ export function App() {
         </div>
       </footer>
       </Router>
-    </CarritoProvider>
+  </CarritoProvider>
   );
 }
