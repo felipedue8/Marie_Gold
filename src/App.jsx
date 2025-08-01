@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { CarritoProvider } from './CarritoContext';
 import { FavoritosProvider } from './FavoritosContext';
+import { BusquedaProvider, useBusqueda } from './BusquedaContext';
 import { BotonFlotanteCarrito } from './BotonFlotanteCarrito';
 import { ToastContainer } from './components/Toast';
 import { PageLoader, useRouteTransition } from './components/PageTransition';
@@ -16,14 +17,15 @@ import { categoriasMenu } from './PaginasNavegacion/categoriasMenu';
 import { ProductosPaginados } from './PaginasNavegacion/ProductosPaginados';
 import { productos } from './productos';
 import { SpeedInsights } from "@vercel/speed-insights/react";
-import { useBusqueda } from './hooks/useBusqueda';
 
 export function App() {
   return (
     <FavoritosProvider>
       <CarritoProvider>
         <Router>
-          <AppContent />
+          <BusquedaProvider>
+            <AppContent />
+          </BusquedaProvider>
         </Router>
       </CarritoProvider>
     </FavoritosProvider>

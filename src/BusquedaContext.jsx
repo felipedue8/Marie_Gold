@@ -1,9 +1,11 @@
-import { useState, useMemo } from 'react';
+import React, { createContext, useContext, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { validarBusqueda } from '../utils/validaciones';
-import { productos } from '../productos';
+import { validarBusqueda } from './utils/validaciones';
+import { productos } from './productos';
 
-export function useBusqueda() {
+const BusquedaContext = createContext();
+
+export function BusquedaProvider({ children }) {
   const navigate = useNavigate();
   const [termino, setTermino] = useState("");
   const [mostrarResultados, setMostrarResultados] = useState(false);
@@ -48,13 +50,24 @@ export function useBusqueda() {
     setMostrarResultados(false);
   };
 
-  return {
-    termino,
-    setTermino,
-    resultados,
-    mostrarResultados,
-    buscar,
-    limpiarBusqueda,
-    hayResultados: resultados.length > 0
-  };
+  return (
+    <BusquedaContext.Provider value={{
+      termino,
+      setTermino,
+      resultados,
+      mostrarResultados,
+      buscar,
+      limpiarBusqueda
+    }}>
+      {children}
+    </BusquedaContext.Provider>
+  );
+}
+
+export function useBusqueda() {
+  const context = useContext(BusquedaContext);
+  if (!context) {
+    throw new Error('useBusqueda debe ser usado dentro de un BusquedaProvider');
+  }
+  return context;
 }
