@@ -2,6 +2,7 @@ import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import { App } from './App.jsx';
+import ErrorBoundary from './components/ErrorBoundary.jsx';
 
 function NoviaDayMessage() {
   const [show, setShow] = useState(true);
@@ -30,7 +31,9 @@ function NoviaDayMessage() {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <NoviaDayMessage />
-    <App />
+    <ErrorBoundary>
+      <NoviaDayMessage />
+      <App />
+    </ErrorBoundary>
   </StrictMode>
 );

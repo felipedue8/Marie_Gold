@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { tarjetas } from './Tarjetas';
 import { productos } from './productos.js';
+import { AnimatedPage } from './components/PageTransition';
 
 const PRODUCTOS_POR_PAGINA = 10; // <--- AGREGA ESTA LÍNEA
 
@@ -18,12 +19,25 @@ export function Home({ contenedorRef }) {
   const productosPagina = productosAleatorios.slice(inicio, fin);
   
   return (
-    <>
+    <AnimatedPage>
       <div className='productos_temporada_titulo'>
-        <h2>LLevalo antes de que se acabe</h2>
+        <h2 style={{ 
+          animation: 'slideInDown 0.5s ease-out',
+          textAlign: 'center'
+        }}>
+          LLevalo antes de que se acabe
+        </h2>
         <div className='productos_temporada'>
-          {productosPagina.map((producto) => (
-            <div key={producto.id} className="tarjeta">
+          {productosPagina.map((producto, index) => (
+            <div 
+              key={producto.id} 
+              className="tarjeta"
+              style={{
+                animationDelay: `${index * 0.1}s`,
+                opacity: 0,
+                animation: 'slideInUp 0.4s ease-out forwards'
+              }}
+            >
               {tarjetas(producto.titulo, producto.descripcion, producto.precio, producto.imagen, producto.alt, producto.id)}
             </div>
           ))}
@@ -45,6 +59,6 @@ export function Home({ contenedorRef }) {
           </button>
         </div>
       </div>
-    </>
+    </AnimatedPage>
   );
 }

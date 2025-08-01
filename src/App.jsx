@@ -1,7 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { CarritoProvider } from './CarritoContext';
+import { FavoritosProvider } from './FavoritosContext';
 import { BotonFlotanteCarrito } from './BotonFlotanteCarrito';
+import { ToastContainer } from './components/Toast';
+import { PageLoader, useRouteTransition } from './components/PageTransition';
 import { Home } from './Home';
 import { Categoria } from './Categoria';
 import './index.css';
@@ -13,15 +16,36 @@ import { categoriasMenu } from './PaginasNavegacion/categoriasMenu';
 import { ProductosPaginados } from './PaginasNavegacion/ProductosPaginados';
 import { productos } from './productos';
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { useBusqueda } from './hooks/useBusqueda';
 
 export function App() {
+  return (
+    <FavoritosProvider>
+      <CarritoProvider>
+        <Router>
+          <AppContent />
+        </Router>
+      </CarritoProvider>
+    </FavoritosProvider>
+  );
+}
+
+function AppContent() {
+  const { isLoading } = useRouteTransition();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [busqueda, setBusqueda] = useState("");
-  const [mostrarResultados, setMostrarResultados] = useState(false);
-  const [resultados, setResultados] = useState([]);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const contenedorRef = useRef(null);
+  
+  // Usar el hook de búsqueda
+  const { 
+    termino, 
+    setTermino, 
+    resultados, 
+    mostrarResultados, 
+    buscar, 
+    limpiarBusqueda 
+  } = useBusqueda();
 
 
   // Menú de links extra para el dropdown (independiente de categoriasMenu)
@@ -39,12 +63,14 @@ export function App() {
   ];
 
   return (
-    <CarritoProvider>
-      <Router>
+    <>
+      <ToastContainer />
+      <PageLoader show={isLoading} />
       <header className="main-header">
         <div className="header-row">
           <Link
             to="/"
+            onClick={limpiarBusqueda}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -60,28 +86,22 @@ export function App() {
             className="buscador-pc"
             onSubmit={e => {
               e.preventDefault();
-              const texto = busqueda.trim().toLowerCase();
-              if (texto.length === 0) return;
-              const filtrados = productos.filter(p =>
-                p.titulo.toLowerCase().includes(texto) ||
-                p.descripcion.toLowerCase().includes(texto)
-              );
-              setResultados(filtrados);
-              setMostrarResultados(true);
-              setSidebarOpen(false);
+              if (buscar(termino)) {
+                setSidebarOpen(false);
+              }
             }}
             style={{ display: 'flex', alignItems: 'center', marginLeft: 'auto', gap: 8 }}
           >
             <input
               type="text"
               placeholder="Buscar productos..."
-              value={busqueda}
-              onChange={e => setBusqueda(e.target.value)}
+              value={termino}
+              onChange={e => setTermino(e.target.value)}
               style={{ fontSize: 18, padding: '6px 10px', borderRadius: 8, border: '1px solid #ccc', fontFamily: 'inherit' }}
             />
             <button type="submit" style={{ fontSize: 18, padding: '6px 14px', borderRadius: 8, background: '#FFD700', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}>Buscar</button>
             {mostrarResultados && (
-              <button type="button" onClick={() => { setMostrarResultados(false); setBusqueda(""); }} style={{ marginLeft: 4, fontSize: 18, padding: '6px 10px', borderRadius: 8, background: '#ffb3b3', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}>X</button>
+              <button type="button" onClick={limpiarBusqueda} style={{ marginLeft: 4, fontSize: 18, padding: '6px 10px', borderRadius: 8, background: '#ffb3b3', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}>X</button>
             )}
           </form>
         </div>
@@ -136,16 +156,10 @@ export function App() {
           <form
             onSubmit={e => {
               e.preventDefault();
-              const texto = busqueda.trim().toLowerCase();
-              if (texto.length === 0) return;
-              const filtrados = productos.filter(p =>
-                p.titulo.toLowerCase().includes(texto) ||
-                p.descripcion.toLowerCase().includes(texto)
-              );
-              setResultados(filtrados);
-              setMostrarResultados(true);
-              setShowMobileSearch(false);
-              setSidebarOpen(false);
+              if (buscar(termino)) {
+                setShowMobileSearch(false);
+                setSidebarOpen(false);
+              }
             }}
             style={{ background: '#fff', borderRadius: 16, padding: 24, minWidth: 260, maxWidth: 320, width: '80vw', boxShadow: '0 2px 16px rgba(0,0,0,0.2)', display: 'flex', flexDirection: 'column', gap: 12 }}
             onClick={e => e.stopPropagation()}
@@ -153,8 +167,8 @@ export function App() {
             <input
               type="text"
               placeholder="Buscar productos..."
-              value={busqueda}
-              onChange={e => setBusqueda(e.target.value)}
+              value={termino}
+              onChange={e => setTermino(e.target.value)}
               style={{ fontSize: 18, padding: '10px 12px', borderRadius: 8, border: '1px solid #ccc', fontFamily: 'inherit' }}
               autoFocus
             />
@@ -174,12 +188,12 @@ export function App() {
       {sidebarOpen && <div className="overlay" onClick={() => setSidebarOpen(false)} />}
       <nav className={sidebarOpen ? "sidebar open" : "sidebar"}>
         <ul>
-          <li><Link to="/manillas" onClick={() => setSidebarOpen(false)}>Manillas</Link></li>
-          <li><Link to="/aretes" onClick={() => setSidebarOpen(false)}>Aretes</Link></li>
-          <li><Link to="/anillos" onClick={() => setSidebarOpen(false)}>Anillos</Link></li>
-          <li><Link to="/accesorios" onClick={() => setSidebarOpen(false)}>Accesorios</Link></li>
-          <li><Link to="/ramos" onClick={() => setSidebarOpen(false)}>Ramos</Link></li>
-          <li><Link to="/crea" onClick={() => setSidebarOpen(false)}>Crea la tuya</Link></li>
+          <li><Link to="/manillas" onClick={() => { setSidebarOpen(false); limpiarBusqueda(); }}>Manillas</Link></li>
+          <li><Link to="/aretes" onClick={() => { setSidebarOpen(false); limpiarBusqueda(); }}>Aretes</Link></li>
+          <li><Link to="/anillos" onClick={() => { setSidebarOpen(false); limpiarBusqueda(); }}>Anillos</Link></li>
+          <li><Link to="/accesorios" onClick={() => { setSidebarOpen(false); limpiarBusqueda(); }}>Accesorios</Link></li>
+          <li><Link to="/ramos" onClick={() => { setSidebarOpen(false); limpiarBusqueda(); }}>Ramos</Link></li>
+          <li><Link to="/crea" onClick={() => { setSidebarOpen(false); limpiarBusqueda(); }}>Crea la tuya</Link></li>
           {/* PC: menú desplegable, móvil: links normales */}
           <li className="dropdown-pc">
             <button
@@ -192,7 +206,7 @@ export function App() {
               <ul className="dropdown-list-pc">
                 {linksExtra.map(link => (
                   <li key={link.ruta}>
-                    <Link to={link.ruta} onClick={() => { setSidebarOpen(false); setDropdownOpen(false); }}>
+                    <Link to={link.ruta} onClick={() => { setSidebarOpen(false); setDropdownOpen(false); limpiarBusqueda(); }}>
                       {link.nombre}
                     </Link>
                   </li>
@@ -206,6 +220,7 @@ export function App() {
               <Link to={link.ruta} onClick={() => {
                 setSidebarOpen(false);
                 setDropdownOpen(false);
+                limpiarBusqueda();
               }}>
                 {link.nombre}
               </Link>
@@ -213,34 +228,7 @@ export function App() {
           ))}
         </ul>
       </nav>
-      {/* Resultados de búsqueda paginados */}
-      {mostrarResultados ? (
-        <div style={{marginTop: 24}}>
-          <button
-            style={{
-              marginBottom: 16,
-              padding: '8px 18px',
-              borderRadius: 8,
-              background: '#FFD700',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: 18,
-              fontFamily: 'inherit'
-            }}
-            onClick={() => {
-              setMostrarResultados(false);
-              setBusqueda("");
-            }}
-          >
-            Volver
-          </button>
-          <ProductosPaginados
-            prefijoId={""}
-            titulo={`Resultados para: "${busqueda}"`}
-            productosCustom={resultados}
-          />
-        </div>
-      ) : (
+      
       <Routes>
         <Route path="/aretes" element={<Categoria nombre="Aretes" />} />
         <Route path="/manillas" element={<Manillas nombre="Manillas" sidebarOpen={sidebarOpen} />} />
@@ -259,9 +247,38 @@ export function App() {
         <Route path="/pines" element={<Categoria nombre="Pines" />} />
         <Route path="/llaveros" element={<Categoria nombre="Llaveros" />} />
         <Route path="/producto/:id" element={<ProductoDetalle />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={
+          /* Resultados de búsqueda o Home */
+          mostrarResultados ? (
+            <div style={{marginTop: 24}}>
+              <button
+                style={{
+                  marginBottom: 16,
+                  padding: '8px 18px',
+                  borderRadius: 8,
+                  background: '#FFD700',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: 18,
+                  fontFamily: 'inherit'
+                }}
+                onClick={() => {
+                  limpiarBusqueda();
+                }}
+              >
+                Volver
+              </button>
+              <ProductosPaginados
+                prefijoId={""}
+                titulo={`Resultados para: "${termino}"`}
+                productosCustom={resultados}
+              />
+            </div>
+          ) : (
+            <Home />
+          )
+        } />
       </Routes>
-      )}
       <BotonFlotanteCarrito />
       <SpeedInsights />
       <footer>
@@ -289,7 +306,6 @@ export function App() {
           </div>
         </div>
       </footer>
-      </Router>
-  </CarritoProvider>
+    </>
   );
 }

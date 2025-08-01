@@ -115,7 +115,7 @@ export const productos = [
   */
   {
     id: 4.15,
-    titulo: " ",
+    titulo: "Caja sorpresa con rosas eternas, mensaje y fotos",
     descripcion: "Caja sorpresa con rosas eternas, mensaje y fotos",
     precio: "40.000",
     imagen: "/4.15.webp",

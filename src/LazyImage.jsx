@@ -1,16 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useCallback } from 'react';
 
-export function LazyImage({ src, alt, style = {}, ...props }) {
+export function LazyImage({ src, alt, style = {}, fallbackSrc = '/vite.svg', ...props }) {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
-  const imgRef = useRef(null);
 
-  useEffect(() => {
-    const img = imgRef.current;
-    if (img && img.complete && img.naturalHeight !== 0) {
-      setLoaded(true); // Imagen ya está cargada desde caché
-    }
-  }, [src]);
+  const handleLoad = useCallback(() => {
+    setLoaded(true);
+  }, []);
+
+  const handleError = useCallback(() => {
+    setError(true);
+    setLoaded(true);
+  }, []);
 
   return (
     <div
@@ -28,36 +29,36 @@ export function LazyImage({ src, alt, style = {}, ...props }) {
       }}
     >
       <img
-        ref={imgRef}
-        src={error ? '/fallback.jpg' : src}
+        src={error ? fallbackSrc : src}
         alt={alt}
-        loading="lazy"
-        onLoad={() => setLoaded(true)}
-        onError={() => {
-          setError(true);
-          setLoaded(true);
-        }}
+        onLoad={handleLoad}
+        onError={handleError}
         style={{
           width: '100%',
           height: '100%',
           objectFit: 'cover',
           opacity: loaded ? 1 : 0,
-          transition: 'opacity 0.5s ease-in-out',
+          transition: 'opacity 0.3s ease-in-out',
           display: 'block',
         }}
         {...props}
       />
 
-      {!loaded && !error && (
-        <span
+      {!loaded && (
+        <div
           style={{
             position: 'absolute',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100%',
             color: '#999',
             fontSize: '0.8rem',
           }}
         >
           Cargando...
-        </span>
+        </div>
       )}
     </div>
   );

@@ -1,3 +1,143 @@
+/* Animaciones globales */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { 
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to { 
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from { 
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to { 
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  from { 
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to { 
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from { 
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to { 
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Transiciones de página */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.page-exit {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: translateY(-10px) scale(1.02);
+  transition: opacity 0.2s ease-in, transform 0.2s ease-in;
+}
+
+/* Animación para elementos que aparecen */
+.animate-in {
+  animation: slideInUp 0.4s ease-out;
+}
+
+.animate-in-delay {
+  animation: slideInUp 0.4s ease-out 0.1s both;
+}
+
+.animate-in-delay-2 {
+  animation: slideInUp 0.4s ease-out 0.2s both;
+}
+
+/* Efectos hover para tarjetas */
+.card-hover-effect {
+  transition: all 0.3s ease;
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Loading overlay suave */
+.page-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9998;
+  backdrop-filter: blur(2px);
+}
+
 .novia-day-btn {
   margin-top: 12px;
   padding: 10px 22px;
@@ -75,6 +215,10 @@
   z-index: 2;
 }
 
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 @keyframes flotar {
   0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.85; }
   50% { transform: translateY(-30px) scale(1.1) rotate(10deg); opacity: 1; }
@@ -87,12 +231,20 @@
 /* Ajuste: separar botón flotante de búsqueda y botón de WhatsApp en móvil */
 @media (max-width: 768px) {
   .boton-flotante-busqueda {
-    bottom: 90px !important;
-    right: 24px !important;
+    bottom: 110px !important; /* Más separación del botón de carrito */
+    right: 20px !important;
+    z-index: 1999 !important;
   }
   .boton-flotante-carrito {
     bottom: 24px !important;
-    right: 24px !important;
+    right: 20px !important;
+    z-index: 2000 !important;
+  }
+  
+  /* Ajustar el botón de carrito/WhatsApp que está en BotonFlotanteCarrito */
+  .boton-flotante-carrito a[href*="wa.me"] {
+    bottom: 24px !important;
+    right: 20px !important;
   }
 }
 /* Botón flotante de búsqueda solo en móvil */
