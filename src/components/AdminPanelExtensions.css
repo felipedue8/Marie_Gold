@@ -1,0 +1,261 @@
+/* Estilos adicionales para el sistema de gestión de imágenes */
+
+/* Estilos para el sistema de selección de modo de imágenes */
+.image-mode-selector {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  justify-content: center;
+}
+
+.mode-toggle-btn {
+  padding: 12px 24px;
+  border: 2px solid #d4a574;
+  border-radius: 25px;
+  background: white;
+  color: #d4a574;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+  justify-content: center;
+}
+
+.mode-toggle-btn:hover {
+  background: #f8f3ee;
+  transform: translateY(-2px);
+}
+
+.mode-toggle-btn.active {
+  background: #d4a574;
+  color: white;
+  box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+}
+
+/* Estilos para el sistema compacto de selección de imágenes */
+.image-select-container {
+  margin-top: 15px;
+}
+
+.image-select-dropdown {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #d4a574;
+  border-radius: 8px;
+  font-size: 16px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+}
+
+.image-select-dropdown:focus {
+  outline: none;
+  border-color: #b8934e;
+  box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+}
+
+.compact-image-preview {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+}
+
+.compact-image-preview img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #d4a574;
+}
+
+.compact-image-preview .image-name {
+  font-weight: 600;
+  color: #495057;
+  font-size: 14px;
+}
+
+/* Mejoras a los estilos existentes */
+.mode-toggle-btn {
+  padding: 10px 20px;
+  border: 2px solid #d4a574;
+  border-radius: 20px;
+  background: white;
+  color: #d4a574;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mode-toggle-btn:hover {
+  background: #f8f3ee;
+  transform: translateY(-2px);
+}
+
+.mode-toggle-btn.active {
+  background: #d4a574;
+  color: white;
+  box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+}
+
+.image-mode-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: flex-start;
+}
+
+/* Estilos para imagen actual en productos */
+.current-image {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.current-image img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #dee2e6;
+}
+
+.current-image span {
+  font-family: monospace;
+  font-size: 13px;
+  color: #6c757d;
+  background: #e9ecef;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+/* Estilos mejorados para los overlay de imágenes */
+.image-preview {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.image-card:hover .image-overlay {
+  opacity: 1;
+}
+
+.image-action-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-action-btn.copy-btn {
+  background: #28a745;
+  color: white;
+}
+
+.image-action-btn.copy-btn:hover {
+  background: #218838;
+  transform: scale(1.1);
+}
+
+.image-action-btn.delete-btn {
+  background: #dc3545;
+  color: white;
+}
+
+.image-action-btn.delete-btn:hover:not(:disabled) {
+  background: #c82333;
+  transform: scale(1.1);
+}
+
+.image-action-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Estilos para confirmaciones */
+.confirm-dialog {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.confirm-dialog h3 {
+  margin-top: 0;
+  color: #dc3545;
+}
+
+.confirm-dialog .button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.confirm-dialog button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.confirm-dialog .btn-cancel {
+  background: #6c757d;
+  color: white;
+}
+
+.confirm-dialog .btn-cancel:hover {
+  background: #545b62;
+}
+
+.confirm-dialog .btn-confirm {
+  background: #dc3545;
+  color: white;
+}
+
+.confirm-dialog .btn-confirm:hover {
+  background: #c82333;
+}

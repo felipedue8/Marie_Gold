@@ -6,6 +6,7 @@ import ImageOptimizationService from '../services/imageOptimization';
 import { ImageStats } from './ImageStats';
 import { showSuccessToast, showErrorToast, showWarningToast } from './Toast';
 import './AdminPanel.css';
+import './AdminPanelExtensions.css';
 
 export function AdminPanel() {
   const { logout } = useAuth();
@@ -228,6 +229,7 @@ export function AdminPanel() {
             onProductChange={handleProductChange}
             onDeleteProduct={deleteProduct}
             onImageUpload={handleImageUpload}
+            githubImages={githubImages}
             isLoading={isLoading}
           />
         )}
@@ -246,6 +248,7 @@ export function AdminPanel() {
             onProductChange={handleProductChange}
             onAddProduct={addNewProduct}
             onImageUpload={handleImageUpload}
+            githubImages={githubImages}
             isLoading={isLoading}
           />
         )}
@@ -255,7 +258,8 @@ export function AdminPanel() {
 }
 
 // Componente para tab de productos
-function ProductsTab({ productos, selectedProduct, setSelectedProduct, onProductChange, onDeleteProduct, onImageUpload, isLoading }) {
+function ProductsTab({ productos, selectedProduct, setSelectedProduct, onProductChange, onDeleteProduct, onImageUpload, githubImages, isLoading }) {
+  const [imageSelectionMode, setImageSelectionMode] = useState('upload');
   const currentProduct = selectedProduct !== null ? productos[selectedProduct] : null;
 
   const handleImageChange = async (e) => {
@@ -267,6 +271,11 @@ function ProductsTab({ productos, selectedProduct, setSelectedProduct, onProduct
         onProductChange('alt', `Imagen de ${currentProduct?.titulo || 'producto'}`);
       }
     }
+  };
+
+  const handleSelectExistingImage = (imageName) => {
+    onProductChange('imagen', `/${imageName}`);
+    onProductChange('alt', `Imagen de ${currentProduct?.titulo || 'producto'}`);
   };
 
   return (
@@ -355,15 +364,70 @@ function ProductsTab({ productos, selectedProduct, setSelectedProduct, onProduct
 
             <div className="form-group">
               <label>Cambiar Imagen:</label>
-              <input 
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                disabled={isLoading}
-              />
-              <div className="optimization-note">
-                Las imágenes se optimizan automáticamente: conversión a WebP, compresión inteligente y redimensionado
+              
+              {/* Selector de modo */}
+              <div className="image-mode-selector">
+                <button
+                  type="button"
+                  className={`mode-toggle-btn ${imageSelectionMode === 'upload' ? 'active' : ''}`}
+                  onClick={() => setImageSelectionMode('upload')}
+                  disabled={isLoading}
+                >
+                  📤 Subir Nueva
+                </button>
+                <button
+                  type="button"
+                  className={`mode-toggle-btn ${imageSelectionMode === 'select' ? 'active' : ''}`}
+                  onClick={() => setImageSelectionMode('select')}
+                  disabled={isLoading}
+                >
+                  📁 Elegir Existente
+                </button>
               </div>
+
+              {/* Subir nueva imagen */}
+              {imageSelectionMode === 'upload' && (
+                <div>
+                  <input 
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    disabled={isLoading}
+                  />
+                  <div className="optimization-note">
+                    ⚡ Optimización automática: WebP + compresión inteligente
+                  </div>
+                </div>
+              )}
+
+              {/* Seleccionar imagen existente */}
+              {imageSelectionMode === 'select' && (
+                <div className="image-select-container">
+                  <select 
+                    value={currentProduct.imagen.replace('/', '') || ''} 
+                    onChange={(e) => handleSelectExistingImage(e.target.value)}
+                    className="image-select-dropdown"
+                    disabled={isLoading}
+                  >
+                    <option value="">Seleccionar imagen...</option>
+                    {githubImages.map((image) => (
+                      <option key={image.sha} value={image.name}>
+                        {image.name.replace(/\.[^/.]+$/, "")} ({Math.round(image.size / 1024)}KB)
+                      </option>
+                    ))}
+                  </select>
+                  
+                  {currentProduct.imagen && (
+                    <div className="compact-image-preview">
+                      <img 
+                        src={githubImages.find(img => `/${img.name}` === currentProduct.imagen)?.download_url || currentProduct.imagen} 
+                        alt="Preview" 
+                      />
+                      <span className="image-name">{currentProduct.imagen.replace('/', '')}</span>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="form-group">
@@ -384,6 +448,32 @@ function ProductsTab({ productos, selectedProduct, setSelectedProduct, onProduct
 
 // Componente para tab de imágenes
 function ImagesTab({ images, onRefresh, isLoading }) {
+  const [deletingImage, setDeletingImage] = useState(null);
+
+  const handleDeleteImage = async (imageName) => {
+    if (!confirm(`¿Estás seguro de eliminar "${imageName}"?`)) {
+      return;
+    }
+
+    setDeletingImage(imageName);
+    showWarningToast('🗑️ Eliminando imagen...');
+
+    try {
+      const result = await GitHubService.deleteImage(imageName);
+      
+      if (result.success) {
+        showSuccessToast(result.message);
+        await onRefresh(); // Recargar lista de imágenes
+      } else {
+        showErrorToast(result.message);
+      }
+    } catch (error) {
+      showErrorToast('❌ Error eliminando imagen');
+    } finally {
+      setDeletingImage(null);
+    }
+  };
+
   return (
     <div className="images-tab">
       <div className="images-header">
@@ -396,26 +486,57 @@ function ImagesTab({ images, onRefresh, isLoading }) {
       <div className="images-grid">
         {images.map((image) => (
           <div key={image.sha} className="image-card">
-            <img src={image.download_url} alt={image.name} />
+            <div className="image-preview">
+              <img src={image.download_url} alt={image.name} />
+              <div className="image-overlay">
+                <button 
+                  onClick={() => navigator.clipboard.writeText(`/${image.name}`)}
+                  className="image-action-btn copy-btn"
+                  title="Copiar ruta"
+                >
+                  📋
+                </button>
+                <button 
+                  onClick={() => handleDeleteImage(image.name)}
+                  className="image-action-btn delete-btn"
+                  disabled={deletingImage === image.name || isLoading}
+                  title="Eliminar imagen"
+                >
+                  {deletingImage === image.name ? '⏳' : '🗑️'}
+                </button>
+              </div>
+            </div>
             <div className="image-info">
               <h4>{image.name}</h4>
               <p>Tamaño: {Math.round(image.size / 1024)} KB</p>
-              <button 
-                onClick={() => navigator.clipboard.writeText(`/${image.name}`)}
-                className="copy-btn"
-              >
-                📋 Copiar Ruta
-              </button>
+              <div className="image-actions">
+                <button 
+                  onClick={() => navigator.clipboard.writeText(`/${image.name}`)}
+                  className="copy-path-btn"
+                  disabled={isLoading}
+                >
+                  📋 Copiar Ruta
+                </button>
+              </div>
             </div>
           </div>
         ))}
       </div>
+      
+      {images.length === 0 && !isLoading && (
+        <div className="no-images">
+          <p>📷 No hay imágenes en el repositorio</p>
+          <p>Sube una imagen desde la pestaña de productos</p>
+        </div>
+      )}
     </div>
   );
 }
 
 // Componente para tab de nuevo producto
-function NewProductTab({ newProduct, onProductChange, onAddProduct, onImageUpload, isLoading }) {
+function NewProductTab({ newProduct, onProductChange, onAddProduct, onImageUpload, isLoading, githubImages }) {
+  const [imageSelectionMode, setImageSelectionMode] = useState('upload'); // 'upload' o 'select'
+
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -425,6 +546,12 @@ function NewProductTab({ newProduct, onProductChange, onAddProduct, onImageUploa
         onProductChange('alt', `Imagen de ${newProduct.titulo || 'producto'}`);
       }
     }
+  };
+
+  const handleSelectExistingImage = (imageName) => {
+    onProductChange('imagen', `/${imageName}`);
+    onProductChange('alt', `Imagen de ${newProduct.titulo || 'producto'}`);
+    showSuccessToast(`✅ Imagen seleccionada: ${imageName}`);
   };
 
   return (
@@ -469,18 +596,96 @@ function NewProductTab({ newProduct, onProductChange, onAddProduct, onImageUploa
 
         <div className="form-group">
           <label>Imagen:</label>
-          <input 
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            disabled={isLoading}
-          />
-          <div className="optimization-note">
-            ⚡ Optimización automática: WebP + compresión inteligente para máximo rendimiento
+          
+          {/* Selector de modo de imagen */}
+          <div className="image-mode-selector">
+            <button
+              type="button"
+              className={`mode-toggle-btn ${imageSelectionMode === 'upload' ? 'active' : ''}`}
+              onClick={() => setImageSelectionMode('upload')}
+              disabled={isLoading}
+            >
+              📤 Subir Nueva
+            </button>
+            <button
+              type="button"
+              className={`mode-toggle-btn ${imageSelectionMode === 'select' ? 'active' : ''}`}
+              onClick={() => setImageSelectionMode('select')}
+              disabled={isLoading}
+            >
+              📁 Elegir Existente
+            </button>
           </div>
+
+          {/* Subir nueva imagen */}
+          {imageSelectionMode === 'upload' && (
+            <div className="upload-section">
+              <input 
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                disabled={isLoading}
+              />
+              <div className="optimization-note">
+                ⚡ Optimización automática: WebP + compresión inteligente para máximo rendimiento
+              </div>
+            </div>
+          )}
+
+          {/* Seleccionar imagen existente */}
+          {imageSelectionMode === 'select' && (
+            <div className="image-selector">
+              <div className="available-images">
+                <h4>🖼️ Imágenes Disponibles ({githubImages.length})</h4>
+                {githubImages.length === 0 ? (
+                  <p className="no-images-message">
+                    📷 No hay imágenes disponibles. Sube una imagen primero.
+                  </p>
+                ) : (
+                  <div className="image-select-container">
+                    <select 
+                      value={newProduct.imagen.replace('/', '') || ''} 
+                      onChange={(e) => handleSelectExistingImage(e.target.value)}
+                      className="image-select-dropdown"
+                    >
+                      <option value="">Seleccionar imagen...</option>
+                      {githubImages.map((image) => (
+                        <option key={image.sha} value={image.name}>
+                          {image.name.replace(/\.[^/.]+$/, "")} ({Math.round(image.size / 1024)}KB)
+                        </option>
+                      ))}
+                    </select>
+                    
+                    {newProduct.imagen && (
+                      <div className="compact-image-preview">
+                        <img 
+                          src={githubImages.find(img => `/${img.name}` === newProduct.imagen)?.download_url} 
+                          alt="Preview" 
+                        />
+                        <span className="image-name">{newProduct.imagen.replace('/', '')}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Preview de imagen seleccionada */}
           {newProduct.imagen && (
             <div className="image-preview">
               <img src={newProduct.imagen} alt="Preview" />
+              <div className="preview-info">
+                <span>✅ Imagen seleccionada</span>
+                <button 
+                  type="button" 
+                  onClick={() => onProductChange('imagen', '')}
+                  className="remove-image-btn"
+                  disabled={isLoading}
+                >
+                  ❌ Quitar
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -496,7 +701,7 @@ function NewProductTab({ newProduct, onProductChange, onAddProduct, onImageUploa
           />
         </div>
 
-        <button type="submit" className="add-product-btn" disabled={isLoading}>
+        <button type="submit" className="add-product-btn" disabled={isLoading || !newProduct.titulo || !newProduct.precio}>
           {isLoading ? '⏳ Creando...' : '➕ Crear Producto'}
         </button>
       </form>
