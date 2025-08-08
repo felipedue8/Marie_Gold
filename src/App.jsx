@@ -9,6 +9,7 @@ import { ToastContainer } from './components/Toast';
 import { PageLoader, useRouteTransition } from './components/PageTransition';
 import { AdminLogin } from './components/AdminLogin';
 import { AdminPanel } from './components/AdminPanel';
+import { DiagnosticPage } from './components/DiagnosticPage';
 import { Home } from './Home';
 import { Categoria } from './Categoria';
 import './index.css';
@@ -269,6 +270,7 @@ function AppContent() {
         <Route path="/llaveros" element={<Categoria nombre="Llaveros" />} />
         <Route path="/producto/:id" element={<ProductoDetalle />} />
         <Route path="/admin" element={<div>Ruta administrativa - redirección automática</div>} />
+        <Route path="/diagnostic" element={<DiagnosticPage />} />
         <Route path="/" element={
           /* Resultados de búsqueda o Home */
           mostrarResultados ? (
