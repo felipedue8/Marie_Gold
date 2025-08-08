@@ -3,9 +3,12 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { CarritoProvider } from './CarritoContext';
 import { FavoritosProvider } from './FavoritosContext';
 import { BusquedaProvider, useBusqueda } from './BusquedaContext';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { BotonFlotanteCarrito } from './BotonFlotanteCarrito';
 import { ToastContainer } from './components/Toast';
 import { PageLoader, useRouteTransition } from './components/PageTransition';
+import { AdminLogin } from './components/AdminLogin';
+import { AdminPanel } from './components/AdminPanel';
 import { Home } from './Home';
 import { Categoria } from './Categoria';
 import './index.css';
@@ -20,20 +23,23 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 
 export function App() {
   return (
-    <FavoritosProvider>
-      <CarritoProvider>
-        <Router>
-          <BusquedaProvider>
-            <AppContent />
-          </BusquedaProvider>
-        </Router>
-      </CarritoProvider>
-    </FavoritosProvider>
+    <AuthProvider>
+      <FavoritosProvider>
+        <CarritoProvider>
+          <Router>
+            <BusquedaProvider>
+              <AppContent />
+            </BusquedaProvider>
+          </Router>
+        </CarritoProvider>
+      </FavoritosProvider>
+    </AuthProvider>
   );
 }
 
 function AppContent() {
   const { isLoading } = useRouteTransition();
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
@@ -48,6 +54,19 @@ function AppContent() {
     buscar, 
     limpiarBusqueda 
   } = useBusqueda();
+
+  // Verificar si estamos en ruta de admin
+  const isAdminRoute = window.location.pathname.startsWith('/admin');
+
+  // Si estamos cargando la autenticación, mostrar loader
+  if (authLoading) {
+    return <PageLoader show={true} />;
+  }
+
+  // Si es ruta de admin, mostrar login o panel según autenticación
+  if (isAdminRoute) {
+    return isAuthenticated ? <AdminPanel /> : <AdminLogin />;
+  }
 
 
   // Menú de links extra para el dropdown (independiente de categoriasMenu)
@@ -183,7 +202,7 @@ function AppContent() {
       )}
         <div className="header-row">
           <button className="hamburger" onClick={() => setSidebarOpen(!sidebarOpen)}>
-            ☰ Cosas Facinantes Aqui
+            ✨ Descubre Nuestra Magia ✨
           </button>
         </div>
       </header>
@@ -249,6 +268,7 @@ function AppContent() {
         <Route path="/pines" element={<Categoria nombre="Pines" />} />
         <Route path="/llaveros" element={<Categoria nombre="Llaveros" />} />
         <Route path="/producto/:id" element={<ProductoDetalle />} />
+        <Route path="/admin" element={<div>Ruta administrativa - redirección automática</div>} />
         <Route path="/" element={
           /* Resultados de búsqueda o Home */
           mostrarResultados ? (
@@ -305,6 +325,22 @@ function AppContent() {
               <img src="/imgs/tik_tok_footer.png" alt="logo tiktok" />
               <span className='info_redes'>@mariegolden </span>
             </a>
+          </div>
+          <div className="admin-access" style={{ marginTop: '20px', textAlign: 'center' }}>
+            <Link 
+              to="/admin" 
+              style={{ 
+                color: '#999', 
+                fontSize: '10px', 
+                textDecoration: 'none',
+                opacity: 0.5,
+                transition: 'opacity 0.3s ease'
+              }}
+              onMouseEnter={e => e.target.style.opacity = '1'}
+              onMouseLeave={e => e.target.style.opacity = '0.5'}
+            >
+              •
+            </Link>
           </div>
         </div>
       </footer>
