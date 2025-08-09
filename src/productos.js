@@ -4,7 +4,7 @@ export const productos = [
     {
       "id": 3.11,
       "titulo": "Osito graduado",
-      "descripcion": "Peluche de oso graduado en traje de graduaciÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n",
+      "descripcion": "Peluche de oso graduado en traje de graduaciÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n",
       "precio": "40.000",
       "imagen": "/3.11.webp",
       "alt": "Peluche de oso graduado"
@@ -35,11 +35,11 @@ export const productos = [
     },
     {
       "id": 3.18,
-      "titulo": "Osito pequeÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±o con rosa en cajita",
-      "descripcion": "Peluche de oso pequeÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±o con rosa en cajita",
+      "titulo": "Osito pequeÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±o con rosa en cajita",
+      "descripcion": "Peluche de oso pequeÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±o con rosa en cajita",
       "precio": "20.000",
       "imagen": "/3.18.webp",
-      "alt": "Peluche de oso pequeÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±o con rosa en cajita"
+      "alt": "Peluche de oso pequeÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±o con rosa en cajita"
     },
     {
       "id": 3.19,
@@ -49,14 +49,14 @@ export const productos = [
       "imagen": "/3.19.webp",
       "alt": "Peluche de oso blanco graduado con diploma"
     },
-    {
+        {
       "id": 4.11,
-      "titulo": "Ramo de 5 rosas + hotwheels 4.11",
-      "descripcion": "Ramo de 5 rosas + hotwheels + ferrero ",
+      "titulo": "Ramo de 5 rosas + hotwheels",
+      "descripcion": "Ramo de 5 rosas + hotwheels + ferrero",
       "precio": "50.000",
       "imagen": "/4.16.webp",
-      "alt": "Imagen de Ramo de 5 rosas + hotwheels 4.11"
-    }},
+      "alt": "Imagen de Ramo de 5 rosas + hotwheels"
+    },
     {
       "id": 4.12,
       "titulo": "Ramo de 8 rosas personalizado",
@@ -67,11 +67,11 @@ export const productos = [
     },
     {
       "id": 4.13,
-      "titulo": "Caja en Forma de CorazÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n con Rosas Eternas",
-      "descripcion": "Caja en forma de corazÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n con rosas eternas y peluche",
+      "titulo": "Caja en Forma de CorazÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n con Rosas Eternas",
+      "descripcion": "Caja en forma de corazÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n con rosas eternas y peluche",
       "precio": "25.000",
       "imagen": "/4.13.webp",
-      "alt": "Caja en Forma de CorazÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n con Rosas Eternas"
+      "alt": "Caja en Forma de CorazÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n con Rosas Eternas"
     },
     {
       "id": 4.15,
@@ -84,10 +84,10 @@ export const productos = [
     {
       "id": 4.17,
       "titulo": "Caja en forma de corazon con 10 rosas y ferrero",
-      "descripcion": "Caja en forma de corazÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n con 10 rosas y ferrero",
+      "descripcion": "Caja en forma de corazÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n con 10 rosas y ferrero",
       "precio": "60.000",
       "imagen": "/4.17.webp",
-      "alt": "Caja en forma de corazÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n con 10 rosas y ferrero"
+      "alt": "Caja en forma de corazÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n con 10 rosas y ferrero"
     },
     {
       "id": 4.19,
