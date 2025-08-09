@@ -1,5 +1,4 @@
 
-
 export const productos = [
     {
       "id": 3.11,
@@ -51,7 +50,7 @@ export const productos = [
     },
     {
       "id": 4.11,
-      "titulo": "Ramo de 5 rosas + hotwheels",
+      "titulo": "Ramo de 5 rosas + hotwheels azul",
       "descripcion": "Ramo de 5 rosas + hotwheels + ferrero",
       "precio": "50.000",
       "imagen": "/4.16.webp",
