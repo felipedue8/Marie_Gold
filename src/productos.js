@@ -1,10 +1,9 @@
 
-
 export const productos = [
     {
       "id": 3.11,
       "titulo": "Osito graduado",
-      "descripcion": "Peluche de oso graduado en traje de graduaciÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n",
+      "descripcion": "Peluche de oso graduado en traje de graduación",
       "precio": "40.000",
       "imagen": "/3.11.webp",
       "alt": "Peluche de oso graduado"
@@ -51,11 +50,11 @@ export const productos = [
     },
     {
       "id": 4.11,
-      "titulo": "Ramo de 5 rosas + hotwheels",
+      "titulo": "Ramo de 5 rosas + hotwheels azul",
       "descripcion": "Ramo de 5 rosas + hotwheels + ferrero",
       "precio": "50.000",
-      "imagen": "/4.16.webp",
-      "alt": "Imagen de Ramo de 5 rosas + hotwheels"
+      "imagen": "/4.11.webp",
+      "alt": "Ramo de flores + hotwheels"
     },
     {
       "id": 4.12,
@@ -67,11 +66,11 @@ export const productos = [
     },
     {
       "id": 4.13,
-      "titulo": "Caja en forma de corazon con rosas eternas y peluche",
-      "descripcion": "Caja en forma de corazon con rosas eternas y peluche",
+      "titulo": "Caja en Forma de Corazón con Rosas Eternas",
+      "descripcion": "Caja en forma de corazón con rosas eternas y peluche",
       "precio": "25.000",
       "imagen": "/4.13.webp",
-      "alt": "Caja en forma de corazon con rosas eternas y peluche"
+      "alt": "Caja en Forma de Corazón con Rosas Eternas"
     },
     {
       "id": 4.15,
@@ -84,10 +83,10 @@ export const productos = [
     {
       "id": 4.17,
       "titulo": "Caja en forma de corazon con 10 rosas y ferrero",
-      "descripcion": "Caja en forma de corazÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n con 10 rosas y ferrero",
+      "descripcion": "Caja en forma de corazón con 10 rosas y ferrero",
       "precio": "60.000",
       "imagen": "/4.17.webp",
-      "alt": "Caja en forma de corazÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n con 10 rosas y ferrero"
+      "alt": "Caja en forma de corazón con 10 rosas y ferrero"
     },
     {
       "id": 4.19,
@@ -95,6 +94,6 @@ export const productos = [
       "descripcion": "ramo de flores de diferentes colores combinado con hotwheels",
       "precio": "50.000",
       "imagen": "/4.19.webp",
-      "alt": "Imagen de Ramo de 5 rosas + hotwheels"
+      "alt": "Ramo de flores + hotwheels"
     }
   ];
