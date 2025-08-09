@@ -259,7 +259,7 @@ export function AdminPanel() {
 
 // Componente para tab de productos
 function ProductsTab({ productos, selectedProduct, setSelectedProduct, onProductChange, onDeleteProduct, onImageUpload, githubImages, isLoading }) {
-  const [imageSelectionMode, setImageSelectionMode] = useState('upload');
+  const [imageSelectionMode, setImageSelectionMode] = useState('input'); // 'input', 'upload' o 'select'
   const currentProduct = selectedProduct !== null ? productos[selectedProduct] : null;
 
   const handleImageChange = async (e) => {
@@ -355,18 +355,18 @@ function ProductsTab({ productos, selectedProduct, setSelectedProduct, onProduct
             </div>
 
             <div className="form-group">
-              <label>Imagen Actual:</label>
-              <div className="current-image">
-                <img src={currentProduct.imagen} alt={currentProduct.alt} />
-                <span>{currentProduct.imagen}</span>
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label>Cambiar Imagen:</label>
+              <label>Imagen:</label>
               
               {/* Selector de modo */}
               <div className="image-mode-selector">
+                <button
+                  type="button"
+                  className={`mode-toggle-btn ${imageSelectionMode === 'input' ? 'active' : ''}`}
+                  onClick={() => setImageSelectionMode('input')}
+                  disabled={isLoading}
+                >
+                  ✏️ Escribir Ruta
+                </button>
                 <button
                   type="button"
                   className={`mode-toggle-btn ${imageSelectionMode === 'upload' ? 'active' : ''}`}
@@ -384,6 +384,34 @@ function ProductsTab({ productos, selectedProduct, setSelectedProduct, onProduct
                   📁 Elegir Existente
                 </button>
               </div>
+
+              {/* Campo de texto directo para imagen */}
+              {imageSelectionMode === 'input' && (
+                <div className="image-input-mode">
+                  <input 
+                    type="text"
+                    value={currentProduct.imagen || ''}
+                    onChange={(e) => onProductChange('imagen', e.target.value)}
+                    placeholder="/3.18.webp"
+                    disabled={isLoading}
+                    className="image-path-input"
+                  />
+                  <small className="form-help">
+                    Escribe la ruta de la imagen (ej: /3.18.webp)
+                  </small>
+                  {currentProduct.imagen && (
+                    <div className="image-preview-simple">
+                      <img 
+                        src={currentProduct.imagen} 
+                        alt="Preview" 
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
 
               {/* Subir nueva imagen */}
               {imageSelectionMode === 'upload' && (
@@ -535,7 +563,7 @@ function ImagesTab({ images, onRefresh, isLoading }) {
 
 // Componente para tab de nuevo producto
 function NewProductTab({ newProduct, onProductChange, onAddProduct, onImageUpload, isLoading, githubImages }) {
-  const [imageSelectionMode, setImageSelectionMode] = useState('upload'); // 'upload' o 'select'
+  const [imageSelectionMode, setImageSelectionMode] = useState('input'); // 'input', 'upload' o 'select'
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -601,6 +629,14 @@ function NewProductTab({ newProduct, onProductChange, onAddProduct, onImageUploa
           <div className="image-mode-selector">
             <button
               type="button"
+              className={`mode-toggle-btn ${imageSelectionMode === 'input' ? 'active' : ''}`}
+              onClick={() => setImageSelectionMode('input')}
+              disabled={isLoading}
+            >
+              ✏️ Escribir Ruta
+            </button>
+            <button
+              type="button"
               className={`mode-toggle-btn ${imageSelectionMode === 'upload' ? 'active' : ''}`}
               onClick={() => setImageSelectionMode('upload')}
               disabled={isLoading}
@@ -616,6 +652,34 @@ function NewProductTab({ newProduct, onProductChange, onAddProduct, onImageUploa
               📁 Elegir Existente
             </button>
           </div>
+
+          {/* Campo de texto directo para imagen */}
+          {imageSelectionMode === 'input' && (
+            <div className="image-input-mode">
+              <input 
+                type="text"
+                value={newProduct.imagen || ''}
+                onChange={(e) => onProductChange('imagen', e.target.value)}
+                placeholder="/4.20.webp"
+                disabled={isLoading}
+                className="image-path-input"
+              />
+              <small className="form-help">
+                Escribe la ruta de la imagen (ej: /4.20.webp)
+              </small>
+              {newProduct.imagen && (
+                <div className="image-preview-simple">
+                  <img 
+                    src={newProduct.imagen} 
+                    alt="Preview" 
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Subir nueva imagen */}
           {imageSelectionMode === 'upload' && (
@@ -672,7 +736,7 @@ function NewProductTab({ newProduct, onProductChange, onAddProduct, onImageUploa
           )}
 
           {/* Preview de imagen seleccionada */}
-          {newProduct.imagen && (
+          {newProduct.imagen && imageSelectionMode !== 'input' && (
             <div className="image-preview">
               <img src={newProduct.imagen} alt="Preview" />
               <div className="preview-info">

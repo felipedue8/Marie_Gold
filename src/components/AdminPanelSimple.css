@@ -1,0 +1,142 @@
+/* Estilos adicionales para el sistema directo de edición */
+
+.save-product-btn {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.save-product-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #218838, #1ea08e);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.save-product-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.save-product-btn.primary {
+  font-size: 16px;
+  padding: 16px 32px;
+  margin-top: 20px;
+}
+
+.readonly-field {
+  background-color: #f8f9fa !important;
+  color: #6c757d !important;
+  cursor: not-allowed !important;
+}
+
+.simple-image-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.simple-image-input input {
+  padding: 12px;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.simple-image-input input:focus {
+  border-color: #80bdff;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.simple-image-input small {
+  color: #6c757d;
+  font-size: 12px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  border-top: 1px solid #e9ecef;
+  margin-top: 30px;
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border-radius: 8px 8px 0 0;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.editor-header h2 {
+  margin: 0;
+  color: #495057;
+  font-size: 18px;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* Hacer el formulario más limpio */
+.product-form .form-group {
+  margin-bottom: 20px;
+}
+
+.product-form .form-group label {
+  display: block;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.product-form input,
+.product-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.product-form input:focus,
+.product-form textarea:focus {
+  border-color: #80bdff;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .editor-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .editor-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .save-product-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

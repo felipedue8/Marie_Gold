@@ -35,7 +35,101 @@
   box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
 }
 
-/* Estilos para el sistema compacto de selección de imágenes */
+/* Estilos para el sistema de entrada de texto simple */
+.image-input-section {
+  margin-bottom: 20px;
+}
+
+.image-input-group {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+  margin-bottom: 8px;
+}
+
+.image-name-input {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #d4a574;
+  border-radius: 8px;
+  font-size: 16px;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.image-name-input:focus {
+  outline: none;
+  border-color: #b8934e;
+  box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+}
+
+.apply-image-btn {
+  padding: 12px 20px;
+  border: 2px solid #28a745;
+  border-radius: 8px;
+  background: #28a745;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.apply-image-btn:hover {
+  background: #218838;
+  border-color: #218838;
+  transform: translateY(-2px);
+}
+
+.apply-image-btn:active {
+  transform: translateY(0);
+}
+
+.available-images-reference {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.available-images-reference h4 {
+  margin: 0 0 12px 0;
+  color: #495057;
+  font-size: 14px;
+}
+
+.images-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.image-reference-btn {
+  padding: 6px 12px;
+  border: 1px solid #d4a574;
+  border-radius: 20px;
+  background: white;
+  color: #d4a574;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.image-reference-btn:hover {
+  background: #d4a574;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.image-reference-btn:active {
+  transform: translateY(0);
+}
+
+/* Estilos compactos existentes mejorados */
 .image-select-container {
   margin-top: 15px;
 }
@@ -144,6 +238,15 @@
   background: #e9ecef;
   padding: 4px 8px;
   border-radius: 4px;
+}
+
+/* Estilos para ayuda en formularios */
+.form-help {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #6c757d;
+  font-style: italic;
 }
 
 /* Estilos mejorados para los overlay de imágenes */
@@ -258,4 +361,25 @@
 
 .confirm-dialog .btn-confirm:hover {
   background: #c82333;
+}
+
+/* Test button style */
+.test-btn {
+  background: #17a2b8;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 8px;
+}
+
+.test-btn:hover {
+  background: #138496;
+}
+
+.test-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
 }

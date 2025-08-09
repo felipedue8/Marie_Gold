@@ -133,6 +133,196 @@ class GitHubService {
     }
   }
 
+  // Actualizar cualquier propiedad de un producto específico por ID
+  async updateProductPropertyInFile({ productId, field, oldValue, newValue }) {
+    try {
+      console.log('🔄 Actualizando producto en productos.js...', { productId, field, oldValue, newValue });
+      
+      const path = 'src/productos.js';
+      const url = `${this.baseUrl}/repos/${this.repo}/contents/${path}`;
+
+      // Obtener archivo actual
+      const currentFile = await fetch(url, {
+        headers: this.getHeaders()
+      });
+
+      if (!currentFile.ok) {
+        throw new Error('No se pudo obtener el archivo productos.js');
+      }
+
+      const currentData = await currentFile.json();
+      const sha = currentData.sha;
+      
+      // Decodificar contenido actual
+      const currentContent = atob(currentData.content);
+      
+      // Crear patrón de búsqueda más robusto que encuentre el producto por ID y la propiedad específica
+      // Manejar tanto valores string como números
+      const escapedOldValue = oldValue.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      
+      let productPattern;
+      if (field === 'id' || field === 'precio' || !isNaN(oldValue)) {
+        // Para campos numéricos (sin comillas)
+        productPattern = new RegExp(
+          `(\\{[\\s\\S]*?"id":\\s*${productId}[\\s\\S]*?"${field}":\\s*)(${escapedOldValue})([\\s\\S]*?\\})`
+        );
+      } else {
+        // Para campos string (con comillas)
+        productPattern = new RegExp(
+          `(\\{[\\s\\S]*?"id":\\s*${productId}[\\s\\S]*?"${field}":\\s*")(${escapedOldValue})("[\\s\\S]*?\\})`
+        );
+      }
+      
+      console.log('🔍 Buscando producto ID:', productId);
+      console.log('🔍 Campo a cambiar:', field);
+      console.log('🔍 Valor anterior:', oldValue);
+      console.log('🔍 Valor nuevo:', newValue);
+      
+      // Verificar si encontramos el producto
+      if (!productPattern.test(currentContent)) {
+        console.error('❌ No se encontró el producto:', { productId, field, oldValue });
+        throw new Error(`No se encontró el producto ID ${productId} con ${field}: "${oldValue}"`);
+      }
+      
+      // Reemplazar el valor de la propiedad
+      let newContent;
+      if (field === 'id' || field === 'precio' || !isNaN(oldValue)) {
+        // Para campos numéricos (sin comillas)
+        newContent = currentContent.replace(productPattern, `$1${newValue}$3`);
+      } else {
+        // Para campos string (con comillas)
+        newContent = currentContent.replace(productPattern, `$1${newValue}$3`);
+      }
+      
+      console.log('✅ Reemplazo realizado correctamente');
+      
+      // Codificar nuevo contenido
+      const base64Content = btoa(unescape(encodeURIComponent(newContent)));
+
+      const payload = {
+        message: `� Actualizar ${field} del producto ${productId}: "${oldValue}" → "${newValue}"`,
+        content: base64Content,
+        sha: sha
+      };
+
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: this.getHeaders(),
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(`Error GitHub: ${error.message}`);
+      }
+
+      return {
+        success: true,
+        message: `✅ ${field} actualizado: "${newValue}"`
+      };
+
+    } catch (error) {
+      console.error('❌ Error actualizando producto en productos.js:', error);
+      return {
+        success: false,
+        error: error.message,
+        message: `❌ Error: ${error.message}`
+      };
+    }
+  }
+
+  // Actualizar producto completo por ID - MÉTODO CORREGIDO
+  async updateCompleteProduct({ productId, newProductData }) {
+    try {
+      console.log('🔄 Actualizando producto completo por ID...', { productId, newProductData });
+      
+      const path = 'src/productos.js';
+      const url = `${this.baseUrl}/repos/${this.repo}/contents/${path}`;
+
+      // Obtener archivo actual
+      const currentFile = await fetch(url, {
+        headers: this.getHeaders()
+      });
+
+      if (!currentFile.ok) {
+        throw new Error('No se pudo obtener el archivo productos.js');
+      }
+
+      const currentData = await currentFile.json();
+      const sha = currentData.sha;
+      
+      // Decodificar contenido actual
+      const currentContent = atob(currentData.content);
+      
+      // Buscar el producto completo por ID con un patrón más específico
+      // Este patrón busca desde la llave de apertura del objeto hasta su cierre
+      const productPattern = new RegExp(
+        `(\\s*\\{\\s*"id":\\s*${productId},)[\\s\\S]*?(\\}\\s*,?)(?=\\s*\\{|\\s*\\])`
+      );
+      
+      console.log('🔍 Buscando producto completo ID:', productId);
+      
+      // Verificar si encontramos el producto
+      const match = currentContent.match(productPattern);
+      if (!match) {
+        console.error('❌ No se encontró el producto ID:', productId);
+        throw new Error(`No se encontró el producto ID ${productId}`);
+      }
+      
+      // Construir nuevo objeto producto completo con formato correcto
+      const newProductObject = `    {
+      "id": ${productId},
+      "titulo": "${newProductData.titulo}",
+      "descripcion": "${newProductData.descripcion}",
+      "precio": "${newProductData.precio}",
+      "imagen": "${newProductData.imagen}",
+      "alt": "${newProductData.alt}"
+    }`;
+      
+      // Determinar si necesita coma final (no es el último producto)
+      const needsComma = match[2].includes(',');
+      const finalObject = needsComma ? newProductObject + ',' : newProductObject;
+      
+      // Reemplazar el producto completo manteniendo el spacing correcto
+      const newContent = currentContent.replace(productPattern, `${match[1].substring(0, match[1].indexOf('{'))}${finalObject}`);
+      
+      console.log('✅ Reemplazo de producto completo realizado');
+      
+      // Codificar nuevo contenido
+      const base64Content = btoa(unescape(encodeURIComponent(newContent)));
+
+      const payload = {
+        message: `🔄 Actualizar producto completo ID ${productId}`,
+        content: base64Content,
+        sha: sha
+      };
+
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: this.getHeaders(),
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(`Error GitHub: ${error.message}`);
+      }
+
+      return {
+        success: true,
+        message: `✅ Producto ID ${productId} actualizado completamente`
+      };
+
+    } catch (error) {
+      console.error('❌ Error actualizando producto completo:', error);
+      return {
+        success: false,
+        error: error.message,
+        message: `❌ Error: ${error.message}`
+      };
+    }
+  }
+
   // Generar contenido del archivo productos.js
   generateProductsFileContent(productos) {
     const productosString = JSON.stringify(productos, null, 2)
@@ -140,7 +330,6 @@ class GitHubService {
       .replace(/\n/g, '\n  ');
 
     return `
-
 export const productos = ${productosString};`;
   }
 

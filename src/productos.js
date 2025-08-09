@@ -54,7 +54,7 @@ export const productos = [
       "titulo": "Ramo de 5 rosas + hotwheels",
       "descripcion": "Ramo de 5 rosas + hotwheels + ferrero",
       "precio": "50.000",
-      "imagen": "/4.12.webp",
+      "imagen": "/4.16.webp",
       "alt": "Ramo de flores + hotwheels"
     },
     {
