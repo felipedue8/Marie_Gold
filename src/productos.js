@@ -4,7 +4,7 @@ export const productos = [
     {
       "id": 3.11,
       "titulo": "Osito graduado",
-      "descripcion": "Peluche de oso graduado en traje de graduación",
+      "descripcion": "Peluche de oso graduado en traje de graduaciÃ³n",
       "precio": "40.000",
       "imagen": "/3.11.webp",
       "alt": "Peluche de oso graduado"
@@ -35,11 +35,11 @@ export const productos = [
     },
     {
       "id": 3.18,
-      "titulo": "Osito pequeño con rosa en cajita",
-      "descripcion": "Peluche de oso pequeño con rosa en cajita",
+      "titulo": "Osito pequeÃ±o con rosa en cajita",
+      "descripcion": "Peluche de oso pequeÃ±o con rosa en cajita",
       "precio": "20.000",
       "imagen": "/3.18.webp",
-      "alt": "Peluche de oso pequeño con rosa en cajita"
+      "alt": "Peluche de oso pequeÃ±o con rosa en cajita"
     },
     {
       "id": 3.19,
@@ -67,11 +67,11 @@ export const productos = [
     },
     {
       "id": 4.13,
-      "titulo": "Caja en Forma de Corazón con Rosas Eternas",
-      "descripcion": "Caja en forma de corazón con rosas eternas y peluche",
+      "titulo": "Caja en Forma de CorazÃ³n con Rosas Eternas",
+      "descripcion": "Caja en forma de corazÃ³n con rosas eternas y peluche",
       "precio": "25.000",
       "imagen": "/4.13.webp",
-      "alt": "Caja en Forma de Corazón con Rosas Eternas"
+      "alt": "Caja en Forma de CorazÃ³n con Rosas Eternas"
     },
     {
       "id": 4.15,
@@ -84,10 +84,10 @@ export const productos = [
     {
       "id": 4.17,
       "titulo": "Caja en forma de corazon con 10 rosas y ferrero",
-      "descripcion": "Caja en forma de corazón con 10 rosas y ferrero",
+      "descripcion": "Caja en forma de corazÃ³n con 10 rosas y ferrero",
       "precio": "60.000",
       "imagen": "/4.17.webp",
-      "alt": "Caja en forma de corazón con 10 rosas y ferrero"
+      "alt": "Caja en forma de corazÃ³n con 10 rosas y ferrero"
     },
     {
       "id": 4.19,
@@ -95,6 +95,6 @@ export const productos = [
       "descripcion": "ramo de flores de diferentes colores combinado con hotwheels",
       "precio": "50.000",
       "imagen": "/4.19.webp",
-      "alt": "Ramo de flores + hotwheels"
+      "alt": "Imagen de Ramo de 5 rosas + hotwheels"
     }
   ];
