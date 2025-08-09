@@ -95,5 +95,13 @@ export const productos = [
       "precio": "50.000",
       "imagen": "/4.19.webp",
       "alt": "Ramo de flores + hotwheels"
+    },
+    {
+      "id": 2.21,
+      "titulo": "Collar estrella sencillo",
+      "descripcion": "Collar de perlas con estrellas acrílicas traspasarentes y dije de estrella",
+      "precio": "18.000",
+      "imagen": "/img_20250809_wa0003_1754774857042_021uip.webp",
+      "alt": "Imagen de Collar estrella sencillo"
     }
   ];
