@@ -35,11 +35,11 @@ export const productos = [
     },
     {
       "id": 3.18,
-      "titulo": "Osito pequeÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±o con rosa en cajita",
-      "descripcion": "Peluche de oso pequeÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±o con rosa en cajita",
+      "titulo": "Osito pequeño con rosa en cajita",
+      "descripcion": "Peluche de oso pequeño con rosa en cajita",
       "precio": "20.000",
       "imagen": "/3.18.webp",
-      "alt": "Peluche de oso pequeÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±o con rosa en cajita"
+      "alt": "Peluche de oso pequeño con rosa en cajita"
     },
     {
       "id": 3.19,
