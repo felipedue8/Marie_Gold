@@ -140,21 +140,17 @@ export function AdminPanel() {
 
   // Agregar nuevo producto
   const addNewProduct = () => {
-    if (!newProduct.titulo || !newProduct.precio || !newProduct.id) {
-      showErrorToast('❌ ID, título y precio son obligatorios');
+    if (!newProduct.titulo || !newProduct.precio) {
+      showErrorToast('❌ Título y precio son obligatorios');
       return;
     }
 
-    // Verificar que el ID no exista ya
-    const existingProduct = productosState.find(p => parseFloat(p.id) === parseFloat(newProduct.id));
-    if (existingProduct) {
-      showErrorToast('❌ Ya existe un producto con ese ID');
-      return;
-    }
+    // Generar ID único
+    const newId = Math.max(...productosState.map(p => parseFloat(p.id))) + 0.01;
     
     const productToAdd = {
       ...newProduct,
-      id: parseFloat(newProduct.id),
+      id: parseFloat(newId.toFixed(2)),
       precio: newProduct.precio.toString()
     };
 
@@ -592,22 +588,6 @@ function NewProductTab({ newProduct, onProductChange, onAddProduct, onImageUploa
       
       <form className="product-form" onSubmit={(e) => { e.preventDefault(); onAddProduct(); }}>
         <div className="form-group">
-          <label>ID del Producto: *</label>
-          <input 
-            type="number"
-            step="0.01"
-            value={newProduct.id}
-            onChange={(e) => onProductChange('id', parseFloat(e.target.value) || '')}
-            placeholder="Ej: 5.01"
-            required
-            disabled={isLoading}
-          />
-          <small className="form-help">
-            Usa decimales para organizar (ej: 5.01, 5.02)
-          </small>
-        </div>
-
-        <div className="form-group">
           <label>Título: *</label>
           <input 
             type="text"
@@ -785,7 +765,7 @@ function NewProductTab({ newProduct, onProductChange, onAddProduct, onImageUploa
           />
         </div>
 
-        <button type="submit" className="add-product-btn" disabled={isLoading || !newProduct.titulo || !newProduct.precio || !newProduct.id}>
+        <button type="submit" className="add-product-btn" disabled={isLoading || !newProduct.titulo || !newProduct.precio}>
           {isLoading ? '⏳ Creando...' : '➕ Crear Producto'}
         </button>
       </form>
