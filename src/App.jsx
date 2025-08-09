@@ -20,6 +20,17 @@ import { ProductoDetalle } from './PaginasNavegacion/ProductoDetalle';
 import { categoriasMenu } from './PaginasNavegacion/categoriasMenu';
 import { ProductosPaginados } from './PaginasNavegacion/ProductosPaginados';
 import { productos } from './productos';
+import { Collares } from './PaginasNavegacion/Collares';
+import { Peluches } from './PaginasNavegacion/Peluches';
+import { Anillos } from './PaginasNavegacion/Anillos';
+import { Tobilleras } from './PaginasNavegacion/Tobilleras';
+import { PatosPersonalizados } from './PaginasNavegacion/PatosPersonalizados';
+import { PerrosGatosFlor } from './PaginasNavegacion/PerrosGatosFlor';
+import { AnimeBandas } from './PaginasNavegacion/AnimeBandas';
+import { Aretes } from './PaginasNavegacion/Aretes';
+import { DetallesRosasEternas } from './PaginasNavegacion/DetallesRosasEternas';
+import { Pines } from './PaginasNavegacion/Pines';
+import { Llaveros } from './PaginasNavegacion/Llaveros';
 import { SpeedInsights } from "@vercel/speed-insights/react";
 
 export function App() {
@@ -213,7 +224,7 @@ function AppContent() {
           <li><Link to="/manillas" onClick={() => { setSidebarOpen(false); limpiarBusqueda(); }}>Manillas</Link></li>
           <li><Link to="/aretes" onClick={() => { setSidebarOpen(false); limpiarBusqueda(); }}>Aretes</Link></li>
           <li><Link to="/anillos" onClick={() => { setSidebarOpen(false); limpiarBusqueda(); }}>Anillos</Link></li>
-          <li><Link to="/accesorios" onClick={() => { setSidebarOpen(false); limpiarBusqueda(); }}>Accesorios</Link></li>
+          <li><Link to="/peluches" onClick={() => { setSidebarOpen(false); limpiarBusqueda(); }}>Peluches</Link></li>
           <li><Link to="/ramos" onClick={() => { setSidebarOpen(false); limpiarBusqueda(); }}>Ramos</Link></li>
           <li><Link to="/crea" onClick={() => { setSidebarOpen(false); limpiarBusqueda(); }}>Crea la tuya</Link></li>
           {/* PC: menú desplegable, móvil: links normales */}
@@ -233,6 +244,7 @@ function AppContent() {
                     </Link>
                   </li>
                 ))}
+                <li><Link to="/accesorios" onClick={() => { setSidebarOpen(false); setDropdownOpen(false); limpiarBusqueda(); }}>Accesorios</Link></li>
               </ul>
             )}
           </li>
@@ -248,31 +260,38 @@ function AppContent() {
               </Link>
             </li>
           ))}
+          <li className="extra-mobile">
+            <Link to="/accesorios" onClick={() => {
+              setSidebarOpen(false);
+              setDropdownOpen(false);
+              limpiarBusqueda();
+            }}>
+              Accesorios
+            </Link>
+          </li>
         </ul>
       </nav>
       
       <Routes>
-        <Route path="/aretes" element={<Categoria nombre="Aretes" />} />
+        <Route path="/aretes" element={<Aretes sidebarOpen={sidebarOpen} />} />
         <Route path="/manillas" element={<Manillas nombre="Manillas" sidebarOpen={sidebarOpen} />} />
-        <Route path="/anillos" element={<Categoria nombre="Anillos" />} />
+        <Route path="/anillos" element={<Anillos sidebarOpen={sidebarOpen} />} />
         <Route path="/accesorios" element={<Categoria nombre="Accesorios" />} />
         <Route path="/ramos" element={<Ramos nombre="Ramos" sidebarOpen={sidebarOpen} />} />
         <Route path="/crea" element={<Categoria nombre="Crea la tuya" />} />
-        {/* Rutas para las nuevas categorías */}
-        <Route path="/collares" element={<Categoria nombre="Collares" />} />
-        <Route path="/peluches" element={<Categoria nombre="Peluches" />} />
-        <Route path="/tobilleras" element={<Categoria nombre="Tobilleras" />} />
-        <Route path="/patos-personalizados" element={<Categoria nombre="Patos personalizados" />} />
-        <Route path="/perros-gatos-flor" element={<Categoria nombre="Perros y Gatos Flor" />} />
-        <Route path="/anime-bandas" element={<Categoria nombre="Anime y bandas" />} />
-        <Route path="/rosas-eternas" element={<Categoria nombre="Detalles en rosas eternas" />} />
-        <Route path="/pines" element={<Categoria nombre="Pines" />} />
-        <Route path="/llaveros" element={<Categoria nombre="Llaveros" />} />
+        <Route path="/collares" element={<Collares sidebarOpen={sidebarOpen} />} />
+        <Route path="/peluches" element={<Peluches sidebarOpen={sidebarOpen} />} />
+        <Route path="/tobilleras" element={<Tobilleras sidebarOpen={sidebarOpen} />} />
+        <Route path="/patos-personalizados" element={<PatosPersonalizados sidebarOpen={sidebarOpen} />} />
+        <Route path="/perros-gatos-flor" element={<PerrosGatosFlor sidebarOpen={sidebarOpen} />} />
+        <Route path="/anime-bandas" element={<AnimeBandas sidebarOpen={sidebarOpen} />} />
+        <Route path="/rosas-eternas" element={<DetallesRosasEternas sidebarOpen={sidebarOpen} />} />
+        <Route path="/pines" element={<Pines sidebarOpen={sidebarOpen} />} />
+        <Route path="/llaveros" element={<Llaveros sidebarOpen={sidebarOpen} />} />
         <Route path="/producto/:id" element={<ProductoDetalle />} />
         <Route path="/admin" element={<div>Ruta administrativa - redirección automática</div>} />
         <Route path="/diagnostic" element={<DiagnosticPage />} />
         <Route path="/" element={
-          /* Resultados de búsqueda o Home */
           mostrarResultados ? (
             <div style={{marginTop: 24}}>
               <button
