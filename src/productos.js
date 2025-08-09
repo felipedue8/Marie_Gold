@@ -103,5 +103,21 @@ export const productos = [
       "precio": "18.000",
       "imagen": "/img_20250809_wa0003_1754774857042_021uip.webp",
       "alt": "Imagen de Collar estrella sencillo"
+    },
+    {
+      "id": 8.11,
+      "titulo": "Perro flor Husky ",
+      "descripcion": "Perro husky personalizado ",
+      "precio": "15.000",
+      "imagen": "/img_20250526_194442_1754776208389_3rqh18.webp",
+      "alt": "Perro husky "
+    },
+    {
+      "id": 8.12,
+      "titulo": "Perro flor mestizo cafe ",
+      "descripcion": "Perro mestizo cafe pardo de orejas paradas personalizado ",
+      "precio": "15.000",
+      "imagen": "/img_20250526_193951_1754776452892_uz2nha.webp",
+      "alt": "Imagen de producto"
     }
   ];
