@@ -49,7 +49,7 @@ export const productos = [
       "imagen": "/3.19.webp",
       "alt": "Peluche de oso blanco graduado con diploma"
     },
-        {
+    {
       "id": 4.11,
       "titulo": "Ramo de 5 rosas + hotwheels",
       "descripcion": "Ramo de 5 rosas + hotwheels + ferrero",
@@ -67,11 +67,11 @@ export const productos = [
     },
     {
       "id": 4.13,
-      "titulo": "Caja en Forma de CorazÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n con Rosas Eternas",
-      "descripcion": "Caja en forma de corazÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n con rosas eternas y peluche",
+      "titulo": "Caja en forma de corazon con rosas eternas y peluche",
+      "descripcion": "Caja en forma de corazon con rosas eternas y peluche",
       "precio": "25.000",
       "imagen": "/4.13.webp",
-      "alt": "Caja en Forma de CorazÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n con Rosas Eternas"
+      "alt": "Caja en forma de corazon con rosas eternas y peluche"
     },
     {
       "id": 4.15,
