@@ -32,9 +32,8 @@ function LoginRegister({ onLogin }) {
         body: JSON.stringify({ email: emailToSend })
       });
       
-      const data = await res.json();
-      
       if (res.ok) {
+        const data = await res.json();
         setShowVerification(true);
         setEmailToVerify(emailToSend);
         startResendTimer();
@@ -48,10 +47,26 @@ function LoginRegister({ onLogin }) {
           setMensaje(`📧 Código de verificación enviado a ${emailToSend}. Revisa tu bandeja de entrada y spam.`);
         }
       } else {
-        setMensaje(data.message || await res.text());
+        // Manejar errores específicos
+        let errorMsg = 'Error al enviar código de verificación';
+        
+        try {
+          const errorData = await res.json();
+          errorMsg = errorData.message || errorMsg;
+        } catch {
+          // Si no es JSON, obtener texto
+          errorMsg = await res.text() || errorMsg;
+        }
+        
+        if (res.status === 500) {
+          errorMsg = 'Error del servidor. Por favor, inténtalo más tarde.';
+        }
+        
+        setMensaje(errorMsg);
       }
     } catch (error) {
-      setMensaje('Error al enviar código de verificación');
+      console.error('Error en sendVerificationCode:', error);
+      setMensaje('Error de conexión. Verifica tu internet e inténtalo nuevamente.');
     }
   };
 
