@@ -32,6 +32,7 @@ import { DetallesRosasEternas } from './PaginasNavegacion/DetallesRosasEternas';
 import { Pines } from './PaginasNavegacion/Pines';
 import { Llaveros } from './PaginasNavegacion/Llaveros';
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import LoginRegister from './components/LoginRegister';
 
 export function App() {
   return (
@@ -55,6 +56,7 @@ function AppContent() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
+  const [usuario, setUsuario] = useState(null); // Estado para usuario logueado
   const contenedorRef = useRef(null);
   
   // Usar el hook de búsqueda
@@ -136,6 +138,12 @@ function AppContent() {
             {mostrarResultados && (
               <button type="button" onClick={limpiarBusqueda} style={{ marginLeft: 4, fontSize: 18, padding: '6px 10px', borderRadius: 8, background: '#ffb3b3', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}>X</button>
             )}
+              {/* Link para login/registro debajo del botón de buscar */}
+              <div style={{ marginTop: 10, width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
+                <Link to="/login" style={{ fontSize: 18, color: '#fff', textDecoration: 'none', padding: '8px 24px', borderRadius: 24, background: 'linear-gradient(90deg,#FFD700,#FFB347)', boxShadow: '0 2px 8px rgba(0,0,0,0.10)', fontWeight: 'bold', letterSpacing: '1px', transition: 'background 0.3s' }}>
+                  {usuario ? `👤 Hola, ${usuario.nombre}` : '🔐 Iniciar sesión / Registrarse'}
+                </Link>
+              </div>
           </form>
         </div>
       {/* Botón flotante de búsqueda solo en móvil */}
@@ -273,6 +281,7 @@ function AppContent() {
       </nav>
       
       <Routes>
+    <Route path="/login" element={<LoginRegister onLogin={setUsuario} />} />
         <Route path="/aretes" element={<Aretes sidebarOpen={sidebarOpen} />} />
         <Route path="/manillas" element={<Manillas nombre="Manillas" sidebarOpen={sidebarOpen} />} />
         <Route path="/anillos" element={<Anillos sidebarOpen={sidebarOpen} />} />
