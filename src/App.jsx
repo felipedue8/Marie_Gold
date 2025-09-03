@@ -59,6 +59,50 @@ function AppContent() {
   const [usuario, setUsuario] = useState(null); // Estado para usuario logueado
   const contenedorRef = useRef(null);
   
+  // Cargar usuario del localStorage al iniciar y escuchar cambios
+  useEffect(() => {
+    // Cargar usuario guardado
+    const usuarioGuardado = localStorage.getItem('usuario');
+    if (usuarioGuardado) {
+      try {
+        setUsuario(JSON.parse(usuarioGuardado));
+      } catch (error) {
+        console.error('Error al cargar usuario:', error);
+        localStorage.removeItem('usuario');
+      }
+    }
+
+    // Escuchar eventos de login/logout
+    const handleUserLogin = (event) => {
+      setUsuario(event.detail);
+    };
+
+    const handleUserLogout = () => {
+      setUsuario(null);
+      localStorage.removeItem('usuario');
+    };
+
+    window.addEventListener('userLogin', handleUserLogin);
+    window.addEventListener('userLogout', handleUserLogout);
+
+    return () => {
+      window.removeEventListener('userLogin', handleUserLogin);
+      window.removeEventListener('userLogout', handleUserLogout);
+    };
+  }, []);
+
+  // Cerrar dropdown al hacer click fuera
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownOpen && !event.target.closest('.user-dropdown')) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [dropdownOpen]);
+  
   // Usar el hook de búsqueda
   const { 
     termino, 
@@ -140,9 +184,73 @@ function AppContent() {
             )}
               {/* Link para login/registro debajo del botón de buscar */}
               <div style={{ marginTop: 10, width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
-                <Link to="/login" style={{ fontSize: 18, color: '#fff', textDecoration: 'none', padding: '8px 24px', borderRadius: 24, background: 'linear-gradient(90deg,#FFD700,#FFB347)', boxShadow: '0 2px 8px rgba(0,0,0,0.10)', fontWeight: 'bold', letterSpacing: '1px', transition: 'background 0.3s' }}>
-                  {usuario ? `👤 Hola, ${usuario.nombre}` : '🔐 Iniciar sesión / Registrarse'}
-                </Link>
+                {usuario ? (
+                  // Dropdown del usuario logueado
+                  <div className="user-dropdown" style={{ position: 'relative' }}>
+                    <button
+                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                      style={{ 
+                        fontSize: 18, 
+                        color: '#fff', 
+                        textDecoration: 'none', 
+                        padding: '8px 24px', 
+                        borderRadius: 24, 
+                        background: 'linear-gradient(90deg,#FFD700,#FFB347)', 
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.10)', 
+                        fontWeight: 'bold', 
+                        letterSpacing: '1px', 
+                        border: 'none',
+                        cursor: 'pointer',
+                        transition: 'background 0.3s'
+                      }}
+                    >
+                      👤 Hola, {usuario.nombre} ▾
+                    </button>
+                    
+                    {dropdownOpen && (
+                      <div style={{
+                        position: 'absolute',
+                        top: '100%',
+                        right: 0,
+                        marginTop: 8,
+                        background: '#fff',
+                        border: '1px solid #ddd',
+                        borderRadius: 8,
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                        zIndex: 1000,
+                        minWidth: 180
+                      }}>
+                        <button
+                          onClick={() => {
+                            window.dispatchEvent(new CustomEvent('userLogout'));
+                            setDropdownOpen(false);
+                          }}
+                          style={{
+                            width: '100%',
+                            padding: '12px 16px',
+                            border: 'none',
+                            background: 'transparent',
+                            textAlign: 'left',
+                            cursor: 'pointer',
+                            fontSize: 14,
+                            fontWeight: 'bold',
+                            color: '#d9534f',
+                            transition: 'background 0.2s'
+                          }}
+                          onMouseEnter={e => e.target.style.background = '#f8f9fa'}
+                          onMouseLeave={e => e.target.style.background = 'transparent'}
+                        >
+                          🚪 Cerrar sesión
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  // Botón de login/registro
+                  <Link to="/login" style={{ fontSize: 18, color: '#fff', textDecoration: 'none', padding: '8px 24px', borderRadius: 24, background: 'linear-gradient(90deg,#FFD700,#FFB347)', boxShadow: '0 2px 8px rgba(0,0,0,0.10)', fontWeight: 'bold', letterSpacing: '1px', transition: 'background 0.3s' }}>
+                    🔐 Iniciar sesión / Registrarse
+                  </Link>
+                )}
               </div>
           </form>
         </div>
