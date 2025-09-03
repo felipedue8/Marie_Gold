@@ -32,11 +32,12 @@ export async function onRequest(context) {
 
     const verification = verifications[0];
 
-    if (!verification.verified) {
-      return new Response('Email no verificado. Usa el código que recibiste por email.', { status: 400 });
+    // Verificar si el código ya fue usado para registro
+    if (verification.verified) {
+      return new Response('Este código ya fue utilizado para un registro', { status: 400 });
     }
 
-    // Verificar si el código no ha expirado (aunque ya fue verificado)
+    // Verificar si el código no ha expirado
     const now = new Date();
     const expiresAt = new Date(verification.expires_at);
     if (now > expiresAt) {

@@ -34,12 +34,10 @@ export async function onRequestPost(context) {
       return new Response('El código ha expirado', { status: 400 });
     }
 
-    // Marcar como verificado
-    await db.prepare('UPDATE email_verification SET verified = TRUE WHERE id = ?')
-      .bind(verification.id).run();
-
+    // NO marcar como verificado aquí - se marcará en el registro
+    // Solo validar que el código es correcto
     return new Response(JSON.stringify({ 
-      message: 'Email verificado correctamente',
+      message: 'Código válido',
       verified: true 
     }), { 
       status: 200,
