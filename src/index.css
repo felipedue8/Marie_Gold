@@ -253,10 +253,154 @@
 }
 @media (max-width: 768px) {
   .buscador-pc { display: none !important; }
+  
+  /* Reducir padding del header principal en móviles */
+  .main-header {
+    padding: 2px !important;
+  }
+  
+  /* Asegurar que el botón de login sea visible en móviles */
+  .auth-section {
+    display: flex !important;
+    margin-left: 16px !important;
+    flex-shrink: 0 !important;
+    min-width: 120px !important;
+  }
+  
+  /* Botón de login específico en móviles */
+  .auth-section a.login-button {
+    font-size: 12px !important;
+    padding: 8px 12px !important;
+    white-space: nowrap !important;
+    min-width: auto !important;
+    border-radius: 20px !important;
+    letter-spacing: 0.3px !important;
+    margin-left: 0px !important;
+    overflow: visible !important;
+  }
+  
+  .auth-section a {
+    font-size: 12px !important;
+    padding: 8px 12px !important;
+    white-space: nowrap !important;
+    min-width: auto !important;
+    border-radius: 20px !important;
+    letter-spacing: 0.3px !important;
+    margin-left: 0px !important;
+    overflow: visible !important;
+  }
+  
+  .auth-section button {
+    font-size: 12px !important;
+    padding: 8px 12px !important;
+    white-space: nowrap !important;
+    min-width: auto !important;
+    border-radius: 20px !important;
+    letter-spacing: 0.3px !important;
+    margin-left: 0px !important;
+    overflow: visible !important;
+  }
+  
+  /* Ajustar header para móvil */
+  .main-header .header-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 3px 8px !important;
+    min-height: 95px !important;
+    gap: 8px !important;
+  }
+  
+  .main-header h1 {
+    font-size: 20px !important;
+    margin: 0 !important;
+  }
+  
+  /* Logo mucho más grande en móviles */
+  .main-header img {
+    height: 130px !important;
+    width: auto !important;
+    margin-right: 12px !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* Contenedor del logo y título */
+  .main-header a {
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 1 !important;
+    min-width: 0 !important;
+  }
+  
   .boton-flotante-busqueda {
     display: flex !important;
     align-items: center;
     justify-content: center;
+  }
+  
+  /* Reducir espacio del contenido principal en móviles */
+  .productos_temporada_titulo {
+    margin: 2px 5px !important;
+    font-size: 24px !important;
+  }
+  
+  .productos_temporada {
+    padding: 5px !important;
+  }
+  
+  /* Eliminar espacio entre filas del header */
+  .header-row + .header-row {
+    margin-top: 0rem !important;
+  }
+}
+
+/* Pantallas muy pequeñas - ajustes adicionales */
+@media (max-width: 480px) {
+  .main-header {
+    padding: 1px !important;
+  }
+  
+  .main-header .header-row {
+    padding: 2px 6px !important;
+    min-height: 85px !important;
+    gap: 6px !important;
+  }
+  
+  .main-header h1 {
+    font-size: 18px !important;
+  }
+  
+  .main-header img {
+    height: 115px !important;
+    margin-right: 10px !important;
+  }
+  
+  .auth-section {
+    margin-left: 10px !important;
+    min-width: 110px !important;
+  }
+  
+  .auth-section a.login-button, .auth-section a, .auth-section button {
+    font-size: 11px !important;
+    padding: 6px 10px !important;
+    border-radius: 18px !important;
+    letter-spacing: 0.2px !important;
+    margin-left: 0px !important;
+  }
+  
+  /* Reducir aún más el espacio en pantallas pequeñas */
+  .productos_temporada_titulo {
+    margin: 0px 3px !important;
+    font-size: 22px !important;
+  }
+  
+  .productos_temporada {
+    padding: 3px !important;
+  }
+  
+  /* Eliminar completamente el espacio entre filas del header */
+  .header-row + .header-row {
+    margin-top: 0rem !important;
   }
 }
 /* Mostrar solo el dropdown en PC y solo los links extra en móvil */

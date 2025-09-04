@@ -14,7 +14,6 @@ import { Home } from './Home';
 import { Categoria } from './Categoria';
 import './index.css';
 import { Ramos } from './PaginasNavegacion/Ramos';
-import { CrearManilla } from './PaginasNavegacion/CrearManilla';
 import { Manillas } from './PaginasNavegacion/Manillas';
 import { ProductoDetalle } from './PaginasNavegacion/ProductoDetalle';
 import { categoriasMenu } from './PaginasNavegacion/categoriasMenu';
@@ -160,6 +159,7 @@ function AppContent() {
             <img src="/imgs/logoPrincipal-removebg-preview.png" alt="Logo" style={{ cursor: 'pointer', height: '160px', marginRight: '10px' }} />
             <h1 style={{ cursor: 'pointer', margin: 0 }}>Marie Golden</h1>
           </Link>
+          
           {/* Buscador solo en PC */}
           <form
             className="buscador-pc"
@@ -182,77 +182,94 @@ function AppContent() {
             {mostrarResultados && (
               <button type="button" onClick={limpiarBusqueda} style={{ marginLeft: 4, fontSize: 18, padding: '6px 10px', borderRadius: 8, background: '#ffb3b3', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}>X</button>
             )}
-              {/* Link para login/registro debajo del botón de buscar */}
-              <div style={{ marginTop: 10, width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
-                {usuario ? (
-                  // Dropdown del usuario logueado
-                  <div className="user-dropdown" style={{ position: 'relative' }}>
+          </form>
+          
+          {/* Botón de login/registro - visible en móvil y PC */}
+          <div className="auth-section" style={{ display: 'flex', alignItems: 'center' }}>
+            {usuario ? (
+              // Dropdown del usuario logueado
+              <div className="user-dropdown" style={{ position: 'relative' }}>
+                <button
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  style={{ 
+                    fontSize: 18, 
+                    color: '#fff', 
+                    textDecoration: 'none', 
+                    padding: '8px 20px', 
+                    borderRadius: 24, 
+                    background: 'linear-gradient(90deg,#FFD700,#FFB347)', 
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.10)', 
+                    fontWeight: 'bold', 
+                    letterSpacing: '1px', 
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'background 0.3s'
+                  }}
+                >
+                  👤 {usuario.nombre} ▾
+                </button>
+                
+                {dropdownOpen && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '100%',
+                    right: 0,
+                    marginTop: 8,
+                    background: '#fff',
+                    border: '1px solid #ddd',
+                    borderRadius: 8,
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                    zIndex: 1000,
+                    minWidth: 180
+                  }}>
                     <button
-                      onClick={() => setDropdownOpen(!dropdownOpen)}
-                      style={{ 
-                        fontSize: 18, 
-                        color: '#fff', 
-                        textDecoration: 'none', 
-                        padding: '8px 24px', 
-                        borderRadius: 24, 
-                        background: 'linear-gradient(90deg,#FFD700,#FFB347)', 
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.10)', 
-                        fontWeight: 'bold', 
-                        letterSpacing: '1px', 
-                        border: 'none',
-                        cursor: 'pointer',
-                        transition: 'background 0.3s'
+                      onClick={() => {
+                        window.dispatchEvent(new CustomEvent('userLogout'));
+                        setDropdownOpen(false);
                       }}
+                      style={{
+                        width: '100%',
+                        padding: '12px 16px',
+                        border: 'none',
+                        background: 'transparent',
+                        textAlign: 'left',
+                        cursor: 'pointer',
+                        fontSize: 14,
+                        fontWeight: 'bold',
+                        color: '#d9534f',
+                        transition: 'background 0.2s'
+                      }}
+                      onMouseEnter={e => e.target.style.background = '#f8f9fa'}
+                      onMouseLeave={e => e.target.style.background = 'transparent'}
                     >
-                      👤 Hola, {usuario.nombre} ▾
+                      🚪 Cerrar sesión
                     </button>
-                    
-                    {dropdownOpen && (
-                      <div style={{
-                        position: 'absolute',
-                        top: '100%',
-                        right: 0,
-                        marginTop: 8,
-                        background: '#fff',
-                        border: '1px solid #ddd',
-                        borderRadius: 8,
-                        boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                        zIndex: 1000,
-                        minWidth: 180
-                      }}>
-                        <button
-                          onClick={() => {
-                            window.dispatchEvent(new CustomEvent('userLogout'));
-                            setDropdownOpen(false);
-                          }}
-                          style={{
-                            width: '100%',
-                            padding: '12px 16px',
-                            border: 'none',
-                            background: 'transparent',
-                            textAlign: 'left',
-                            cursor: 'pointer',
-                            fontSize: 14,
-                            fontWeight: 'bold',
-                            color: '#d9534f',
-                            transition: 'background 0.2s'
-                          }}
-                          onMouseEnter={e => e.target.style.background = '#f8f9fa'}
-                          onMouseLeave={e => e.target.style.background = 'transparent'}
-                        >
-                          🚪 Cerrar sesión
-                        </button>
-                      </div>
-                    )}
                   </div>
-                ) : (
-                  // Botón de login/registro
-                  <Link to="/login" style={{ fontSize: 18, color: '#fff', textDecoration: 'none', padding: '8px 24px', borderRadius: 24, background: 'linear-gradient(90deg,#FFD700,#FFB347)', boxShadow: '0 2px 8px rgba(0,0,0,0.10)', fontWeight: 'bold', letterSpacing: '1px', transition: 'background 0.3s' }}>
-                    🔐 Iniciar sesión / Registrarse
-                  </Link>
                 )}
               </div>
-          </form>
+            ) : (
+              // Botón de login/registro
+              <Link 
+                to="/login" 
+                className="login-button"
+                style={{ 
+                  fontSize: 16, 
+                  color: '#fff', 
+                  textDecoration: 'none', 
+                  padding: '8px 20px', 
+                  borderRadius: 24, 
+                  background: 'linear-gradient(90deg,#FFD700,#FFB347)', 
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.10)', 
+                  fontWeight: 'bold', 
+                  letterSpacing: '1px', 
+                  transition: 'background 0.3s',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                🔐 Iniciar sesión
+              </Link>
+            )}
+          </div>
         </div>
       {/* Botón flotante de búsqueda solo en móvil */}
       <button
@@ -330,7 +347,7 @@ function AppContent() {
       )}
         <div className="header-row">
           <button className="hamburger" onClick={() => setSidebarOpen(!sidebarOpen)}>
-            ✨ Descubre Nuestra Magia ✨
+            ✨Nuestra Magia✨
           </button>
         </div>
       </header>

@@ -40,15 +40,15 @@ function LoginRegister({ onLogin }) {
         
         // Para desarrollo: mostrar el código en consola si no hay servicio de email
         if (data.code) {
-          console.log('Código de verificación para desarrollo:', data.code);
-          setMensaje(`📧 Código enviado. Para desarrollo: ${data.code}`);
+          console.log('Codigo de verificacion para desarrollo:', data.code);
+          setMensaje(`📧 Codigo enviado. Para desarrollo: ${data.code}`);
         } else {
           // Email real enviado
-          setMensaje(`📧 Código de verificación enviado a ${emailToSend}. Revisa tu bandeja de entrada y spam.`);
+          setMensaje(`📧 Codigo de verificacion enviado a ${emailToSend}. Revisa tu bandeja de entrada y spam.`);
         }
       } else {
         // Manejar errores específicos
-        let errorMsg = 'Error al enviar código de verificación';
+        let errorMsg = 'Error al enviar codigo de verificacion';
         
         try {
           const errorData = await res.json();
@@ -59,14 +59,14 @@ function LoginRegister({ onLogin }) {
         }
         
         if (res.status === 500) {
-          errorMsg = 'Error del servidor. Por favor, inténtalo más tarde.';
+          errorMsg = 'Error. Intenta de nuevo mas tarde.';
         }
         
         setMensaje(errorMsg);
       }
     } catch (error) {
       console.error('Error en sendVerificationCode:', error);
-      setMensaje('Error de conexión. Verifica tu internet e inténtalo nuevamente.');
+      setMensaje('Error de conexion. Verifica tu internet e intentalo nuevamente.');
     }
   };
 

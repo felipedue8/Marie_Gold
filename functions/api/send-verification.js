@@ -1,17 +1,29 @@
-import { EmailService, generateVerificationCode, generateToken } from '../services/emailService.js';
+import { GmailService, generateVerificationCode, generateToken } from '../services/gmailService.js';
 
 export async function onRequestPost(context) {
   const db = context.env.DB;
   const { email } = await context.request.json();
 
   if (!email) {
-    return new Response('Email requerido', { status: 400 });
+    return new Response(JSON.stringify({
+      error: 'Email requerido',
+      message: 'Debes proporcionar un email valido.'
+    }), { 
+      status: 400,
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   // Validar formato de email
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    return new Response('Formato de email inválido', { status: 400 });
+    return new Response(JSON.stringify({
+      error: 'Email invalido',
+      message: 'El formato del email no es valido.'
+    }), { 
+      status: 400,
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   try {
@@ -20,17 +32,31 @@ export async function onRequestPost(context) {
       .bind(email).all();
     
     if (existingUsers.length > 0) {
-      return new Response('Este email ya está registrado', { status: 409 });
+      return new Response(JSON.stringify({
+        error: 'Email ya registrado',
+        message: 'Este email ya tiene una cuenta registrada. Si olvidaste tu contraseña, usa la opción de recuperación.'
+      }), { 
+        status: 409,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
-    // Verificar si ya hay una verificación pendiente (últimos 5 minutos para evitar spam)
-    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
+    // Verificar si ya hay una verificación pendiente (últimos 1 minuto para desarrollo, 5 minutos en producción)
+    const waitTimeMinutes = process.env.NODE_ENV === 'production' ? 5 : 1;
+    const waitTimeAgo = new Date(Date.now() - waitTimeMinutes * 60 * 1000).toISOString();
     const { results: recentVerifications } = await db.prepare(
       'SELECT id FROM email_verification WHERE email = ? AND created_at > ? AND verified = FALSE'
-    ).bind(email, fiveMinutesAgo).all();
+    ).bind(email, waitTimeAgo).all();
 
     if (recentVerifications.length > 0) {
-      return new Response('Ya se envió un código recientemente. Espera 5 minutos.', { status: 429 });
+      return new Response(JSON.stringify({
+        error: 'Código enviado recientemente',
+        message: `Ya se envió un código de verificación recientemente. Espera ${waitTimeMinutes} minuto(s) antes de solicitar otro.`,
+        waitTime: `${waitTimeMinutes} minuto(s)`
+      }), { 
+        status: 409,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
     // Generar código y token
@@ -43,25 +69,30 @@ export async function onRequestPost(context) {
       'INSERT INTO email_verification (email, token, expires_at) VALUES (?, ?, ?)'
     ).bind(email, verificationCode, expiresAt).run();
 
-    // Enviar email (solo si tienes configurado RESEND_API_KEY)
-    if (context.env.RESEND_API_KEY) {
+    // Enviar email usando Gmail API (100% gratuito)
+    if (context.env.GMAIL_CLIENT_ID && context.env.GMAIL_CLIENT_SECRET && context.env.GMAIL_REFRESH_TOKEN) {
       try {
-        const emailService = new EmailService(context.env.RESEND_API_KEY);
-        await emailService.sendVerificationEmail(email, verificationCode, 'Usuario');
+        const gmailService = new GmailService(
+          context.env.GMAIL_CLIENT_ID,
+          context.env.GMAIL_CLIENT_SECRET, 
+          context.env.GMAIL_REFRESH_TOKEN
+        );
+        await gmailService.sendVerificationEmail(email, verificationCode, 'Usuario');
         
         return new Response(JSON.stringify({ 
-          message: 'Código de verificación enviado por email',
+          message: 'Codigo de verificacion enviado por email',
           email: email 
         }), { 
           status: 200,
           headers: { 'Content-Type': 'application/json' }
         });
       } catch (emailError) {
-        console.error('Error enviando email real, usando modo desarrollo:', emailError);
+        console.error('Error enviando email con Gmail, usando modo desarrollo:', emailError);
         // Si falla el email real, usar modo desarrollo
         console.log(`Código de verificación para ${email}: ${verificationCode}`);
         return new Response(JSON.stringify({ 
-          message: 'Código de verificación generado (error en envío - revisa consola)',
+          error: 'Error en envio',
+          message: 'Hubo un problema enviando el email. El codigo aparece en la consola del servidor.',
           email: email,
           code: verificationCode // Solo para desarrollo
         }), { 
@@ -73,7 +104,7 @@ export async function onRequestPost(context) {
       // Para desarrollo - devolver el código (NO hacer esto en producción)
       console.log(`Código de verificación para ${email}: ${verificationCode}`);
       return new Response(JSON.stringify({ 
-        message: 'Código de verificación generado (revisa la consola del servidor)',
+        message: 'Codigo de verificacion generado (Gmail no configurado - revisa la consola del servidor)',
         email: email,
         code: verificationCode // Solo para desarrollo
       }), { 
@@ -83,7 +114,13 @@ export async function onRequestPost(context) {
     }
 
   } catch (error) {
-    console.error('Error en verificación de email:', error);
-    return new Response('Error interno del servidor', { status: 500 });
+    console.error('Error en verificacion de email:', error);
+    return new Response(JSON.stringify({
+      error: 'Error',
+      message: 'Ocurrio un error inesperado. Intenta de nuevo.'
+    }), { 
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 }

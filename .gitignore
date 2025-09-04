@@ -1,3 +1,11 @@
+# ======================================
+# ARCHIVOS DE BUILD Y DEPENDENCIAS
+# ======================================
+node_modules
+dist
+dist-ssr
+*.local
+
 # Logs
 logs
 *.log
@@ -7,26 +15,174 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# ======================================
+# INFORMACIÓN SENSIBLE Y CREDENCIALES
+# ======================================
 
-# Variables de entorno (¡IMPORTANTE para seguridad!)
+# Variables de entorno (¡CRÍTICO para seguridad!)
 .env
+.env.*
+!.env.example
 .env.local
+.env.development.local
+.env.test.local
 .env.production
+.env.production.local
+
+# Archivos de desarrollo de Cloudflare
+.dev.vars
+!.dev.vars.example
+.wrangler/
+wrangler.toml
+!wrangler.example.toml
+
+# Credenciales OAuth y API
+*.json
+!package.json
+!package-lock.json
+!vercel.json
+!tsconfig.json
+credentials.json
+client_secret.json
+service-account.json
+gmail-credentials.json
+github-credentials.json
+oauth2-credentials.json
+
+# Tokens y claves
+token.json
+refresh_token.json
+gmail-token.json
+api-keys.txt
+tokens.txt
+secrets.txt
+*.key
+*.pem
+*.p12
+*.pfx
+
+# ======================================
+# ARCHIVOS DE DESARROLLO Y PRUEBAS
+# ======================================
+
+# Scripts de configuración con credenciales
+setup-gmail.js
+setup-*.js
+test-*.js
+debug-*.js
+local-*.js
+temp-*.js
+prueba-*.js
+
+# Archivos temporales
+temp/
+tmp/
+test-data/
+mock-data/
+sandbox/
+playground/
+experiments/
+
+# Backups y dumps
+*.backup
+*.bak
+backup/
+backups/
+*.dump
+*.sql.gz
+db-backup-*
+database-backup-*
+
+# Base de datos local
+*.db
+*.sqlite
+*.sqlite3
+database.sql
+local.db
+test.db
+dev.db
+
+# Archivos de migración sensibles
+migrations/
+sync-*.ps1
+sync-*.sh
+migrate-*.js
+restore-*.js
+
+# ======================================
+# ARCHIVOS DE DOCUMENTACIÓN TEMPORAL
+# ======================================
+
+# Documentación de desarrollo (mantener solo README.md)
+*_SETUP.md
+*_RESUMEN.md
+*_FINAL.md
+*_ERROR*.md
+*_FIXED.md
+INSTRUCCIONES_*.md
+CLOUDFLARE_*.md
+SISTEMA_*.md
+TEST_*.md
+BUILD_*.md
+ADMIN_*.md
+
+# ======================================
+# HERRAMIENTAS DE DESARROLLO
+# ======================================
+
+# Coverage y análisis
+coverage/
+*.lcov
+.nyc_output
+bundle-analyzer-report.html
+stats.json
+
+# Cache de herramientas
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.vuepress/dist
+.serverless/
+.fusebox/
+.dynamodb/
+
+# ======================================
+# ARCHIVOS DEL SISTEMA Y EDITOR
+# ======================================
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json.example
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-.wrangler/
-migrations/
-wrangler.toml
+
+# OS generated files
+.DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ======================================
+# ARCHIVOS DE UPLOAD Y TEMPORALES
+# ======================================
+
+# Archivos subidos
+uploads/
+downloads/
+temp-uploads/
+temp-images/
+
+# Certificados SSL
+ssl/
+*.crt
+*.cert
+
+# Yarn
+.yarn-integrity
