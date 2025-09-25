@@ -121,7 +121,7 @@ export const productos = [
       "alt": "Imagen de producto"
     },
     {
-      "id": 1.11,
+      "id": 1.01,
       "titulo": "Manilla Corona Negra ",
       "descripcion": "Diseño sofisticado con cuentas de lava negra mate, detalles metálicos dorados ",
       "precio": "22.000",
@@ -129,15 +129,15 @@ export const productos = [
       "alt": "Imagen de Manilla Corona Negra – Cuentas Mate + Detalles Dorados + Corazón Negro Incrustado"
     },
     {
-      "id": 1.12,
+      "id": 1.02,
       "titulo": "Manilla Corona de Lujo",
-      "descripcion": "👑 ¡Lleva tu realeza en la muñeca! Esta manilla es para quien lidera, inspira y no necesita pedir permiso para brillar.",
+      "descripcion": "👑 ¡Lleva tu realeza en la muñeca! Esta manilla es para quien lidera, inspira y no necesita pedir permiso para brillar.\n\nCuentas de lava negra mate combinadas con esferas doradas brillantes y una corona central incrustada con cristales que reflejan luz y poder.",
       "precio": "22.000",
       "imagen": "/2_1758811902574_dtw2tw.webp",
       "alt": "Imagen de Manilla Corona de Lujo"
     },
     {
-      "id": 1.13,
+      "id": 1.03,
       "titulo": "Manilla Calavera de Lujo ",
       "descripcion": "💀 ¿Eres único? Tu accesorio también debe serlo.\nEsta manilla combina el misterio",
       "precio": "22.000",
@@ -145,11 +145,51 @@ export const productos = [
       "alt": "Imagen de Manilla Calavera de Lujo – Cuentas Negras Brillantes + Cráneo Dorado con Cristales | Audaz, Rebelde y Sofisticado"
     },
     {
-      "id": 1,
+      "id": 1.04,
       "titulo": "Manilla Ángel Protector",
       "descripcion": "✨ Protege tu energía y eleva tu estilo con esta manilla única.",
       "precio": "22.000",
       "imagen": "/4_1758812016016_fwo69r.webp",
       "alt": "Imagen de Manilla Ángel Protector"
+    },
+    {
+      "id": 1.15,
+      "titulo": "Manilla Corona Negra con Cristales",
+      "descripcion": "Manilla con cuentas de lava negra mate, detalles metálicos dorados y una corona central negra incrustada con cristales pequeños.\n",
+      "precio": "22.000",
+      "imagen": "/5_1758813273400_n7u7so.webp",
+      "alt": "Imagen de Manilla Corona Negra con Cristales"
+    },
+    {
+      "id": 1.16,
+      "titulo": "Manilla Santo Niño Dorado",
+      "descripcion": "Manilla con cuentas de lava blanca, detalles dorados y colgante circular con figura del Santo Niño rodeada de cristales.\nCordón blanco ajustable",
+      "precio": "22.000",
+      "imagen": "/6_1758813327471_il9xwz.webp",
+      "alt": "Imagen de Manilla Santo Niño Dorado"
+    },
+    {
+      "id": 1.17,
+      "titulo": "Manilla Corona en Círculo",
+      "descripcion": "Manilla tipo cadena fina dorada, con esferas metálicas y colgante circular incrustado con cristales y pequeña corona en el centro.",
+      "precio": "22.000",
+      "imagen": "/7_1758813364641_qxwlv2.webp",
+      "alt": "Imagen de Manilla Corona en Círculo"
+    },
+    {
+      "id": 1.18,
+      "titulo": "Manilla Motociclista Dorado",
+      "descripcion": "Manilla con cordón trenzado burdeos, terminaciones doradas y colgante de motociclista en metal dorado.\nAjustable. Diseño único para amantes de la moto o estilo urbano",
+      "precio": "25.000",
+      "imagen": "/8_1758813412264_57vuns.webp",
+      "alt": "Imagen de Manilla Motociclista Dorado"
+    },
+    {
+      "id": 1.19,
+      "titulo": "Manilla Infinito con Cristales ",
+      "descripcion": "Manilla con cordón rojo trenzado y símbolo de infinito en metal plateado incrustado con cristales.\nAjustable. Diseño simple y moderno, ideal para pareja o uso personal.",
+      "precio": "24.000",
+      "imagen": "/9_1758813471735_n5qsct.webp",
+      "alt": "Imagen de Manilla Infinito con Cristales "
     }
   ];
