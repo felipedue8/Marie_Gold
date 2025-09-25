@@ -121,7 +121,7 @@ export const productos = [
       "alt": "Imagen de producto"
     },
     {
-      "id": 1.01,
+      "id": 1.11,
       "titulo": "Manilla Corona Negra ",
       "descripcion": "Diseño sofisticado con cuentas de lava negra mate, detalles metálicos dorados ",
       "precio": "22.000",
@@ -129,15 +129,15 @@ export const productos = [
       "alt": "Imagen de Manilla Corona Negra – Cuentas Mate + Detalles Dorados + Corazón Negro Incrustado"
     },
     {
-      "id": 1.02,
+      "id": 1.12,
       "titulo": "Manilla Corona de Lujo",
-      "descripcion": "👑 ¡Lleva tu realeza en la muñeca! Esta manilla es para quien lidera, inspira y no necesita pedir permiso para brillar.\n\nCuentas de lava negra mate combinadas con esferas doradas brillantes y una corona central incrustada con cristales que reflejan luz y poder.",
+      "descripcion": "👑 ¡Lleva tu realeza en la muñeca! Esta manilla es para quien lidera, inspira y no necesita pedir permiso para brillar.",
       "precio": "22.000",
       "imagen": "/2_1758811902574_dtw2tw.webp",
       "alt": "Imagen de Manilla Corona de Lujo"
     },
     {
-      "id": 1.03,
+      "id": 1.13,
       "titulo": "Manilla Calavera de Lujo ",
       "descripcion": "💀 ¿Eres único? Tu accesorio también debe serlo.\nEsta manilla combina el misterio",
       "precio": "22.000",
@@ -145,7 +145,7 @@ export const productos = [
       "alt": "Imagen de Manilla Calavera de Lujo – Cuentas Negras Brillantes + Cráneo Dorado con Cristales | Audaz, Rebelde y Sofisticado"
     },
     {
-      "id": 1.04,
+      "id": 1,
       "titulo": "Manilla Ángel Protector",
       "descripcion": "✨ Protege tu energía y eleva tu estilo con esta manilla única.",
       "precio": "22.000",
