@@ -119,5 +119,37 @@ export const productos = [
       "precio": "15.000",
       "imagen": "/img_20250526_193951_1754776452892_uz2nha.webp",
       "alt": "Imagen de producto"
+    },
+    {
+      "id": 1.01,
+      "titulo": "Manilla Corona Negra – Cuentas Mate + Detalles Dorados + Corazón Negro Incrustado",
+      "descripcion": "Diseño sofisticado con cuentas de lava negra mate, detalles metálicos dorados y una corona negra incrustada con cristales azules y negros que emanan poder y misterio.",
+      "precio": "22.000",
+      "imagen": "/1_1758811805886_y2xfq0.webp",
+      "alt": "Imagen de Manilla Corona Negra – Cuentas Mate + Detalles Dorados + Corazón Negro Incrustado"
+    },
+    {
+      "id": 1.02,
+      "titulo": "Manilla Corona de Lujo",
+      "descripcion": "👑 ¡Lleva tu realeza en la muñeca! Esta manilla es para quien lidera, inspira y no necesita pedir permiso para brillar.\n\nCuentas de lava negra mate combinadas con esferas doradas brillantes y una corona central incrustada con cristales que reflejan luz y poder.",
+      "precio": "22.000",
+      "imagen": "/2_1758811902574_dtw2tw.webp",
+      "alt": "Imagen de Manilla Corona de Lujo"
+    },
+    {
+      "id": 1.03,
+      "titulo": "Manilla Calavera de Lujo – Cuentas Negras Brillantes + Cráneo Dorado con Cristales | Audaz, Rebelde y Sofisticado",
+      "descripcion": "💀 ¿Eres único? Tu accesorio también debe serlo.\nEsta manilla combina el misterio de las cuentas negras brillantes con una calavera dorada incrustada de cristales que grita “soy diferente… y me encanta”.",
+      "precio": "22.000",
+      "imagen": "/3_1758811956296_zcqjvp.webp",
+      "alt": "Imagen de Manilla Calavera de Lujo – Cuentas Negras Brillantes + Cráneo Dorado con Cristales | Audaz, Rebelde y Sofisticado"
+    },
+    {
+      "id": 1.04,
+      "titulo": "Manilla Ángel Protector",
+      "descripcion": "✨ Protege tu energía y eleva tu estilo con esta manilla única.\nHecha con cuentas de lava blanca suaves al tacto, combinadas con detalles metálicos dorados y un hermoso colgante en forma de ángel rodeado de cristales brillantes.",
+      "precio": "22.000",
+      "imagen": "/4_1758812016016_fwo69r.webp",
+      "alt": "Imagen de Manilla Ángel Protector"
     }
   ];
