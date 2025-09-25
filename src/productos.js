@@ -122,8 +122,8 @@ export const productos = [
     },
     {
       "id": 1.01,
-      "titulo": "Manilla Corona Negra – Cuentas Mate + Detalles Dorados + Corazón Negro Incrustado",
-      "descripcion": "Diseño sofisticado con cuentas de lava negra mate, detalles metálicos dorados y una corona negra incrustada con cristales azules y negros que emanan poder y misterio.",
+      "titulo": "Manilla Corona Negra ",
+      "descripcion": "Diseño sofisticado con cuentas de lava negra mate, detalles metálicos dorados ",
       "precio": "22.000",
       "imagen": "/1_1758811805886_y2xfq0.webp",
       "alt": "Imagen de Manilla Corona Negra – Cuentas Mate + Detalles Dorados + Corazón Negro Incrustado"
@@ -138,8 +138,8 @@ export const productos = [
     },
     {
       "id": 1.03,
-      "titulo": "Manilla Calavera de Lujo – Cuentas Negras Brillantes + Cráneo Dorado con Cristales | Audaz, Rebelde y Sofisticado",
-      "descripcion": "💀 ¿Eres único? Tu accesorio también debe serlo.\nEsta manilla combina el misterio de las cuentas negras brillantes con una calavera dorada incrustada de cristales que grita “soy diferente… y me encanta”.",
+      "titulo": "Manilla Calavera de Lujo ",
+      "descripcion": "💀 ¿Eres único? Tu accesorio también debe serlo.\nEsta manilla combina el misterio",
       "precio": "22.000",
       "imagen": "/3_1758811956296_zcqjvp.webp",
       "alt": "Imagen de Manilla Calavera de Lujo – Cuentas Negras Brillantes + Cráneo Dorado con Cristales | Audaz, Rebelde y Sofisticado"
@@ -147,7 +147,7 @@ export const productos = [
     {
       "id": 1.04,
       "titulo": "Manilla Ángel Protector",
-      "descripcion": "✨ Protege tu energía y eleva tu estilo con esta manilla única.\nHecha con cuentas de lava blanca suaves al tacto, combinadas con detalles metálicos dorados y un hermoso colgante en forma de ángel rodeado de cristales brillantes.",
+      "descripcion": "✨ Protege tu energía y eleva tu estilo con esta manilla única.",
       "precio": "22.000",
       "imagen": "/4_1758812016016_fwo69r.webp",
       "alt": "Imagen de Manilla Ángel Protector"
