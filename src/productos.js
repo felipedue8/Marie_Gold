@@ -155,7 +155,7 @@ export const productos = [
     {
       "id": 1.15,
       "titulo": "Manilla Corona Negra con Cristales",
-      "descripcion": "Manilla con cuentas de lava negra mate, detalles metálicos dorados y una corona central negra incrustada con cristales pequeños.\n",
+      "descripcion": "Manilla Black Crown: cuentas de lava negra, acentos dorados y dije de corona incrustada.",
       "precio": "22.000",
       "imagen": "/5_1758813273400_n7u7so.webp",
       "alt": "Imagen de Manilla Corona Negra con Cristales"
@@ -163,7 +163,7 @@ export const productos = [
     {
       "id": 1.16,
       "titulo": "Manilla Santo Niño Dorado",
-      "descripcion": "Manilla con cuentas de lava blanca, detalles dorados y colgante circular con figura del Santo Niño rodeada de cristales.\nCordón blanco ajustable",
+      "descripcion": "Pulsera Lava Blanca Santo Niño - Detalles dorados y cristales.",
       "precio": "22.000",
       "imagen": "/6_1758813327471_il9xwz.webp",
       "alt": "Imagen de Manilla Santo Niño Dorado"
@@ -171,7 +171,7 @@ export const productos = [
     {
       "id": 1.17,
       "titulo": "Manilla Corona en Círculo",
-      "descripcion": "Manilla tipo cadena fina dorada, con esferas metálicas y colgante circular incrustado con cristales y pequeña corona en el centro.",
+      "descripcion": "Pulsera Cadena Dorada Corona y Cristales - Estilo fino y moderno.",
       "precio": "22.000",
       "imagen": "/7_1758813364641_qxwlv2.webp",
       "alt": "Imagen de Manilla Corona en Círculo"
@@ -179,7 +179,7 @@ export const productos = [
     {
       "id": 1.18,
       "titulo": "Manilla Motociclista Dorado",
-      "descripcion": "Manilla con cordón trenzado burdeos, terminaciones doradas y colgante de motociclista en metal dorado.\nAjustable. Diseño único para amantes de la moto o estilo urbano",
+      "descripcion": "Pulsera trenzada burdeos con dije de moto dorado. Ajustable y de diseño único.",
       "precio": "25.000",
       "imagen": "/8_1758813412264_57vuns.webp",
       "alt": "Imagen de Manilla Motociclista Dorado"
@@ -187,7 +187,7 @@ export const productos = [
     {
       "id": 1.19,
       "titulo": "Manilla Infinito con Cristales ",
-      "descripcion": "Manilla con cordón rojo trenzado y símbolo de infinito en metal plateado incrustado con cristales.\nAjustable. Diseño simple y moderno, ideal para pareja o uso personal.",
+      "descripcion": "Pulsera roja trenzada con símbolo de infinito en plata y cristales. Ajustable y de diseño moderno.",
       "precio": "24.000",
       "imagen": "/9_1758813471735_n5qsct.webp",
       "alt": "Imagen de Manilla Infinito con Cristales "
