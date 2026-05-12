@@ -131,7 +131,7 @@ export const productos = [
     {
       "id": 1.02,
       "titulo": "Manilla Corona de Lujo",
-      "descripcion": "👑 ¡Lleva tu realeza en la muñeca! Esta manilla es para quien lidera, inspira y no necesita pedir permiso para brillar.\n\nCuentas de lava negra mate combinadas con esferas doradas brillantes y una corona central incrustada con cristales que reflejan luz y poder.",
+      "descripcion": "¡Lleva tu realeza en la muñeca! Esta manilla es para quien lidera, inspira y no necesita pedir permiso para brillar.",
       "precio": "22.000",
       "imagen": "/2_1758811902574_dtw2tw.webp",
       "alt": "Imagen de Manilla Corona de Lujo"
