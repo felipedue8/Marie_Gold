@@ -30,6 +30,9 @@ import { Aretes } from './PaginasNavegacion/Aretes';
 import { DetallesRosasEternas } from './PaginasNavegacion/DetallesRosasEternas';
 import { Pines } from './PaginasNavegacion/Pines';
 import { Llaveros } from './PaginasNavegacion/Llaveros';
+import { PersonalizadorPatos } from './PaginasNavegacion/PersonalizadorPatos';
+import RotatingMenu from './components/RotatingMenu';
+import { ThreeJsTest } from './components/ThreeJsTest';
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import LoginRegister from './components/LoginRegister';
 
@@ -126,19 +129,22 @@ function AppContent() {
   }
 
 
-  // Menú de links extra para el dropdown (independiente de categoriasMenu)
+
+  // Menú de links extra para el dropdown y menú rotativo
   const linksExtra = [
     { nombre: 'Collares', ruta: '/collares' },
     { nombre: 'Peluches', ruta: '/peluches' },
     { nombre: 'Tobilleras', ruta: '/tobilleras' },
     { nombre: 'Patos personalizados', ruta: '/patos-personalizados' },
+    { nombre: '🦆 Personalizador 3D', ruta: '/personalizador-patos' },
     { nombre: 'Perros y Gatos Flor', ruta: '/perros-gatos-flor' },
     { nombre: 'Anime y bandas', ruta: '/anime-bandas' },
     { nombre: 'Detalles en rosas eternas', ruta: '/rosas-eternas' },
     { nombre: 'Pines', ruta: '/pines' },
     { nombre: 'Llaveros', ruta: '/llaveros' }
-    // Puedes agregar más aquí
   ];
+
+
 
   return (
     <>
@@ -350,7 +356,9 @@ function AppContent() {
             ✨Nuestra Magia✨
           </button>
         </div>
-      </header>
+  </header>
+  {/* Menú rotativo horizontal de extras. Puedes moverlo cambiando la prop 'position' a 'top', 'bottom' o 'fixed-bottom' */}
+  <RotatingMenu links={linksExtra} position="top" />
       {sidebarOpen && <div className="overlay" onClick={() => setSidebarOpen(false)} />}
       <nav className={sidebarOpen ? "sidebar open" : "sidebar"}>
         <ul>
@@ -360,27 +368,7 @@ function AppContent() {
           <li><Link to="/peluches" onClick={() => { setSidebarOpen(false); limpiarBusqueda(); }}>Peluches</Link></li>
           <li><Link to="/ramos" onClick={() => { setSidebarOpen(false); limpiarBusqueda(); }}>Ramos</Link></li>
           <li><Link to="/crea" onClick={() => { setSidebarOpen(false); limpiarBusqueda(); }}>Crea la tuya</Link></li>
-          {/* PC: menú desplegable, móvil: links normales */}
-          <li className="dropdown-pc">
-            <button
-              className="dropdown-btn-pc"
-              onClick={() => setDropdownOpen(d => !d)}
-            >
-              Más categorías {dropdownOpen ? '▲' : '▼'}
-            </button>
-            {dropdownOpen && (
-              <ul className="dropdown-list-pc">
-                {linksExtra.map(link => (
-                  <li key={link.ruta}>
-                    <Link to={link.ruta} onClick={() => { setSidebarOpen(false); setDropdownOpen(false); limpiarBusqueda(); }}>
-                      {link.nombre}
-                    </Link>
-                  </li>
-                ))}
-                <li><Link to="/accesorios" onClick={() => { setSidebarOpen(false); setDropdownOpen(false); limpiarBusqueda(); }}>Accesorios</Link></li>
-              </ul>
-            )}
-          </li>
+
           {/* En móvil, los links extra se muestran como <li> normales justo debajo */}
           {linksExtra.map(link => (
             <li key={link.ruta} className="extra-mobile">
@@ -417,6 +405,8 @@ function AppContent() {
         <Route path="/peluches" element={<Peluches sidebarOpen={sidebarOpen} />} />
         <Route path="/tobilleras" element={<Tobilleras sidebarOpen={sidebarOpen} />} />
         <Route path="/patos-personalizados" element={<PatosPersonalizados sidebarOpen={sidebarOpen} />} />
+        <Route path="/personalizador-patos" element={<PersonalizadorPatos sidebarOpen={sidebarOpen} />} />
+        <Route path="/test-threejs" element={<ThreeJsTest />} />
         <Route path="/perros-gatos-flor" element={<PerrosGatosFlor sidebarOpen={sidebarOpen} />} />
         <Route path="/anime-bandas" element={<AnimeBandas sidebarOpen={sidebarOpen} />} />
         <Route path="/rosas-eternas" element={<DetallesRosasEternas sidebarOpen={sidebarOpen} />} />

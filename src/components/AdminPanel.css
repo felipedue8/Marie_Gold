@@ -633,3 +633,64 @@
   content: '✅';
   animation: none;
 }
+
+/* Estilos para imágenes pendientes */
+.pending-images-notice {
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  border: 2px solid #ffc107;
+  border-radius: 10px;
+  margin: 10px 20px;
+  animation: pendingPulse 2s ease-in-out infinite alternate;
+}
+
+.pending-images-content {
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pending-images-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.pending-count {
+  font-weight: bold;
+  font-size: 16px;
+  color: #856404;
+}
+
+.pending-text {
+  font-size: 14px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.pending-images-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.pending-image-name {
+  background: rgba(255, 193, 7, 0.2);
+  color: #856404;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: monospace;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+@keyframes pendingPulse {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.8);
+  }
+}

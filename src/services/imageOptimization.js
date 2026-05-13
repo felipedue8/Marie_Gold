@@ -148,22 +148,19 @@ class ImageOptimizationService {
   }
 
   /**
-   * Generar nombre único para archivo optimizado
+   * Generar nombre para archivo optimizado manteniendo nombre original
    * @param {string} originalName - Nombre original del archivo
    * @returns {string}
    */
   generateOptimizedFileName(originalName) {
-    const timestamp = Date.now();
-    const randomStr = Math.random().toString(36).substring(2, 8);
+    // Obtener el nombre sin extensión
+    const nameWithoutExt = originalName.split('.').slice(0, -1).join('.');
     
-    // Remover extensión original y agregar .webp
-    const nameWithoutExt = originalName.split('.')[0];
-    const cleanName = nameWithoutExt
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, '_')
-      .substring(0, 20);
-
-    return `${cleanName}_${timestamp}_${randomStr}.webp`;
+    // Si no hay nombre (solo extensión), usar 'imagen'
+    const baseName = nameWithoutExt || 'imagen';
+    
+    // Retornar con extensión .webp manteniendo el nombre original
+    return `${baseName}.webp`;
   }
 
   /**

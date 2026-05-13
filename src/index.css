@@ -422,6 +422,8 @@ nav.sidebar ul li button {
   padding: 0.7rem 1.2rem;
   font-size: 2rem;
   font-family: "Pacifico", serif;
+}
+
 .dropdown-list-pc li a {
   display: block;
   padding: 0.5rem 1.2rem;
@@ -438,7 +440,17 @@ nav.sidebar ul li button {
   color: #FFD700;
   background: none;
 }
-  z-index: 10;
+
+.dropdown-list-pc {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  background: #222;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  min-width: 220px;
+  padding: 0.5rem 0;
 }
 nav.sidebar ul li ul li {
   margin: 0.2rem 0;

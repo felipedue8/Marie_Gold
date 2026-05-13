@@ -163,7 +163,7 @@ export const productos = [
     {
       "id": 1.16,
       "titulo": "Manilla Santo Niño Dorado",
-      "descripcion": "Pulsera Lava Blanca Santo Niño - Detalles dorados y cristales.",
+      "descripcion": "Manilla con cuentas de lava blanca, detalles dorados",
       "precio": "22.000",
       "imagen": "/6_1758813327471_il9xwz.webp",
       "alt": "Imagen de Manilla Santo Niño Dorado"
@@ -171,7 +171,7 @@ export const productos = [
     {
       "id": 1.17,
       "titulo": "Manilla Corona en Círculo",
-      "descripcion": "Pulsera Cadena Dorada Corona y Cristales - Estilo fino y moderno.",
+      "descripcion": "Manilla tipo cadena fina dorada, con esferas metálicas y colgante circular",
       "precio": "22.000",
       "imagen": "/7_1758813364641_qxwlv2.webp",
       "alt": "Imagen de Manilla Corona en Círculo"
@@ -179,7 +179,7 @@ export const productos = [
     {
       "id": 1.18,
       "titulo": "Manilla Motociclista Dorado",
-      "descripcion": "Pulsera trenzada burdeos con dije de moto dorado. Ajustable y de diseño único.",
+      "descripcion": "Manilla con cordón trenzado burdeos",
       "precio": "25.000",
       "imagen": "/8_1758813412264_57vuns.webp",
       "alt": "Imagen de Manilla Motociclista Dorado"
@@ -187,7 +187,7 @@ export const productos = [
     {
       "id": 1.19,
       "titulo": "Manilla Infinito con Cristales ",
-      "descripcion": "Pulsera roja trenzada con símbolo de infinito en plata y cristales. Ajustable y de diseño moderno.",
+      "descripcion": "Manilla con cordón rojo trenzado",
       "precio": "24.000",
       "imagen": "/9_1758813471735_n5qsct.webp",
       "alt": "Imagen de Manilla Infinito con Cristales "

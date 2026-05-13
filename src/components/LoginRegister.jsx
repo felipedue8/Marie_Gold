@@ -41,11 +41,9 @@ function LoginRegister({ onLogin }) {
         // Para desarrollo: mostrar el código en consola si no hay servicio de email
         if (data.code) {
           console.log('Codigo de verificacion para desarrollo:', data.code);
-          setMensaje(`📧 Codigo enviado. Para desarrollo: ${data.code}`);
-        } else {
-          // Email real enviado
-          setMensaje(`📧 Codigo de verificacion enviado a ${emailToSend}. Revisa tu bandeja de entrada y spam.`);
         }
+        // Mostrar mensaje simple de envío
+        setMensaje(`📧 Codigo enviado. Revisa tu bandeja de entrada y spam.`);
       } else {
         // Manejar errores específicos
         let errorMsg = 'Error al enviar codigo de verificacion';
@@ -66,7 +64,12 @@ function LoginRegister({ onLogin }) {
       }
     } catch (error) {
       console.error('Error en sendVerificationCode:', error);
-      setMensaje('Error de conexion. Verifica tu internet e intentalo nuevamente.');
+      // Mensaje mejorado que distintuye entre problemas de conexión
+      if (error.message.includes('Failed to fetch')) {
+        setMensaje('No se puede conectar al servidor. Asegurate de que el servidor de desarrollo esta corriendo (wrangler pages dev)');
+      } else {
+        setMensaje('Error de conexion. Verifica tu internet e intentalo nuevamente.');
+      }
     }
   };
 

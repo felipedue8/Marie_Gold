@@ -17,6 +17,7 @@ export function AdminPanel() {
   const [githubImages, setGithubImages] = useState([]);
   const [showImageStats, setShowImageStats] = useState(false);
   const [lastOptimizationStats, setLastOptimizationStats] = useState(null);
+  const [pendingImages, setPendingImages] = useState([]); // Imágenes pendientes de subir
 
   // Estados para nuevo producto
   const [newProduct, setNewProduct] = useState({
@@ -42,8 +43,8 @@ export function AdminPanel() {
     }
   };
 
-  // Manejar subida de imagen con optimización automática
-  const handleImageUpload = async (file) => {
+  // Manejar selección de imagen (solo procesa, no sube automáticamente)
+  const handleImageUpload = async (file, productIndex = null) => {
     if (!file) return;
 
     setIsLoading(true);
@@ -60,36 +61,36 @@ export function AdminPanel() {
       setLastOptimizationStats(processed.stats);
       setShowImageStats(true);
       
-      showSuccessToast(`✅ Imagen optimizada: ${processed.stats.optimized.compressionRatio}% reducción`);
+      showSuccessToast(`✅ Imagen optimizada: ${processed.stats.optimized.compressionRatio}% reducción - Será subida al guardar cambios`);
 
-      // 2. Subir imagen optimizada a GitHub
-      showWarningToast('📤 Subiendo imagen optimizada a GitHub...');
+      // 2. Guardar imagen como pendiente (no subir todavía)
+      const imagePath = `/${processed.fileName}`;
+      const pendingImage = {
+        id: Date.now() + Math.random(), // ID único para la imagen pendiente
+        file: processed.optimizedFile,
+        fileName: processed.fileName,
+        path: imagePath,
+        stats: processed.stats,
+        productIndex: productIndex // Para saber a qué producto pertenece
+      };
+
+      setPendingImages(prev => [...prev, pendingImage]);
       
-      const result = await GitHubService.uploadImage(processed.optimizedFile, processed.fileName);
+      // Mostrar información detallada en consola
+      console.table({
+        'Archivo Original': {
+          Tamaño: processed.stats.original.sizeFormatted,
+          Formato: processed.stats.original.format,
+          Dimensiones: `${processed.stats.original.width}x${processed.stats.original.height}`
+        },
+        'Archivo Optimizado': {
+          Tamaño: processed.stats.optimized.sizeFormatted,
+          Formato: processed.stats.optimized.format,
+          Reducción: `${processed.stats.optimized.compressionRatio}%`
+        }
+      });
 
-      if (result.success) {
-        showSuccessToast(`🎉 ${result.message} (${processed.stats.optimized.sizeFormatted})`);
-        await loadGitHubImages(); // Recargar lista de imágenes
-        
-        // Mostrar información detallada en consola
-        console.table({
-          'Archivo Original': {
-            Tamaño: processed.stats.original.sizeFormatted,
-            Formato: processed.stats.original.format,
-            Dimensiones: `${processed.stats.original.width}x${processed.stats.original.height}`
-          },
-          'Archivo Optimizado': {
-            Tamaño: processed.stats.optimized.sizeFormatted,
-            Formato: processed.stats.optimized.format,
-            Reducción: `${processed.stats.optimized.compressionRatio}%`
-          }
-        });
-
-        return `/${processed.fileName}`; // Retornar path relativo
-      } else {
-        showErrorToast(result.message);
-        return null;
-      }
+      return imagePath; // Retornar path que se usará temporalmente
     } catch (error) {
       console.error('Error en el proceso de imagen:', error);
       showErrorToast(`❌ Error: ${error.message}`);
@@ -105,15 +106,43 @@ export function AdminPanel() {
     showWarningToast('💾 Guardando cambios...');
 
     try {
+      // 1. Subir imágenes pendientes primero
+      if (pendingImages.length > 0) {
+        showWarningToast(`📤 Subiendo ${pendingImages.length} imagen(es) pendiente(s)...`);
+        
+        for (const pendingImage of pendingImages) {
+          try {
+            const result = await GitHubService.uploadImage(pendingImage.file, pendingImage.fileName);
+            if (result.success) {
+              showSuccessToast(`✅ ${pendingImage.fileName} subida exitosamente`);
+            } else {
+              throw new Error(result.message);
+            }
+          } catch (imageError) {
+            showErrorToast(`❌ Error subiendo ${pendingImage.fileName}: ${imageError.message}`);
+            return; // Detener si hay error subiendo una imagen
+          }
+        }
+        
+        // Limpiar imágenes pendientes después de subirlas
+        setPendingImages([]);
+        
+        // Recargar lista de imágenes de GitHub
+        await loadGitHubImages();
+        showSuccessToast('🎉 Todas las imágenes subidas exitosamente');
+      }
+
+      // 2. Guardar cambios de productos
+      showWarningToast('💾 Guardando datos de productos...');
       const result = await GitHubService.updateProductsFile(productosState);
       
       if (result.success) {
-        showSuccessToast(result.message);
+        showSuccessToast('✅ ' + result.message);
       } else {
-        showErrorToast(result.message);
+        showErrorToast('❌ ' + result.message);
       }
     } catch (error) {
-      showErrorToast('❌ Error guardando cambios');
+      showErrorToast('❌ Error guardando cambios: ' + error.message);
     } finally {
       setIsLoading(false);
     }
@@ -190,7 +219,10 @@ export function AdminPanel() {
           <h1>🛠️ Panel Administrativo - Marie Golden</h1>
           <div className="admin-header-actions">
             <button onClick={saveToGitHub} disabled={isLoading} className="save-btn">
-              {isLoading ? '⏳ Guardando...' : '💾 Guardar Cambios'}
+              {isLoading ? '⏳ Guardando...' : 
+               pendingImages.length > 0 ? 
+               `💾 Guardar Cambios (${pendingImages.length} imagen${pendingImages.length > 1 ? 'es' : ''} pendiente${pendingImages.length > 1 ? 's' : ''})` : 
+               '💾 Guardar Cambios'}
             </button>
             <button onClick={logout} className="logout-btn">
               🚪 Cerrar Sesión
@@ -219,6 +251,23 @@ export function AdminPanel() {
           ➕ Nuevo Producto
         </button>
       </nav>
+
+      {/* Mostrar imágenes pendientes */}
+      {pendingImages.length > 0 && (
+        <div className="pending-images-notice">
+          <div className="pending-images-content">
+            <div className="pending-images-info">
+              <span className="pending-count">📤 {pendingImages.length} imagen{pendingImages.length > 1 ? 'es' : ''} pendiente{pendingImages.length > 1 ? 's' : ''} de subir</span>
+              <span className="pending-text">Se subirán al guardar cambios</span>
+            </div>
+            <div className="pending-images-list">
+              {pendingImages.map((img) => (
+                <span key={img.id} className="pending-image-name">{img.fileName}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       <main className="admin-content">
         {activeTab === 'productos' && (
@@ -265,7 +314,7 @@ function ProductsTab({ productos, selectedProduct, setSelectedProduct, onProduct
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const imagePath = await onImageUpload(file);
+      const imagePath = await onImageUpload(file, selectedProduct);
       if (imagePath) {
         onProductChange('imagen', imagePath);
         onProductChange('alt', `Imagen de ${currentProduct?.titulo || 'producto'}`);
@@ -424,6 +473,8 @@ function ProductsTab({ productos, selectedProduct, setSelectedProduct, onProduct
                   />
                   <div className="optimization-note">
                     ⚡ Optimización automática: WebP + compresión inteligente
+                    <br />
+                    📝 <strong>Nota:</strong> La imagen se subirá cuando guardes los cambios
                   </div>
                 </div>
               )}
@@ -568,7 +619,7 @@ function NewProductTab({ newProduct, onProductChange, onAddProduct, onImageUploa
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const imagePath = await onImageUpload(file);
+      const imagePath = await onImageUpload(file, null); // null indica que es un nuevo producto
       if (imagePath) {
         onProductChange('imagen', imagePath);
         onProductChange('alt', `Imagen de ${newProduct.titulo || 'producto'}`);
@@ -692,6 +743,8 @@ function NewProductTab({ newProduct, onProductChange, onAddProduct, onImageUploa
               />
               <div className="optimization-note">
                 ⚡ Optimización automática: WebP + compresión inteligente para máximo rendimiento
+                <br />
+                📝 <strong>Nota:</strong> La imagen se subirá cuando guardes los cambios
               </div>
             </div>
           )}
